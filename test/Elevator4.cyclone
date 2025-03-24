@@ -1,0 +1,110 @@
+option-trace=true;
+graph Elevator{
+    const int FLOORS=4;
+
+    // Landing call buttons for each floor
+    bool l0_u, l0_d;
+    bool l1_u, l1_d;
+    bool l2_u, l2_d;
+    bool l3_u, l3_d;
+
+    // Car call buttons
+    bool c0;
+    bool c1;
+    bool c2;
+    bool c3;
+
+    enum {UP, DOWN, NA} DIR;
+    int f where f >= 0 && f <= FLOORS - 1; // Current floor
+
+    normal node DoorOpen {}
+    normal node MoveUp { f++; }
+    normal node MoveDown { f--; }
+
+    normal node CC {}
+    normal start node LC {}
+
+    normal node SetMotionUp { DIR = #UP; }
+    normal node SetMotionDown { DIR = #DOWN; }
+    normal node SetIdle { DIR = #NA; }
+
+    // Initialize state for each floor
+    normal node L0 {
+        c0 = false;
+        l0_u = false;
+        l0_d = false;
+    }
+    normal node L1 {
+        c1 = false;
+        l1_u = false;
+        l1_d = false;
+    }
+    normal node L2 {
+        c2 = false;
+        l2_u = false;
+        l2_d = false;
+    }
+    normal node L3 {
+        c3 = false;
+        l3_u = false;
+        l3_d = false;
+    }
+
+    final normal node DoorClose {}
+
+    edge { LC -> DoorOpen 
+        where (f == 0 && (l0_u || l0_d)) ||
+              (f == 1 && (l1_u || l1_d)) ||
+              (f == 2 && (l2_u || l2_d)) ||
+              (f == 3 && (l3_u || l3_d));
+    }
+
+    edge { LC -> SetMotionUp
+        where (
+            (f == 0 && (l1_u || l2_u || l3_u || l1_d || l2_d || l3_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 1 && (l2_u || l3_u || l2_d || l3_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 2 && (l3_u || l3_d) && (DIR == #UP || DIR == #NA))         );
+    }
+
+    edge { LC -> SetMotionDown
+        where (
+            (f == 3 && (l0_d || l1_d || l2_d || l0_u || l1_u || l2_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 2 && (l0_d || l1_d || l0_u || l1_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 1 && (l0_d || l0_u) && (DIR == #DOWN || DIR == #NA))         );
+    }
+
+    edge { DoorOpen -> CC }
+    edge { CC -> DoorClose }
+    edge { DoorClose -> SetMotionUp
+        where (DIR == #UP && f < FLOORS-1);
+    }
+    edge { DoorClose -> SetMotionDown
+        where (DIR == #DOWN && f > 0);
+    }
+
+    edge { DoorClose -> SetIdle where 
+        (!c0 && !c1 && !c2 && !c3);
+    }
+    edge { SetMotionUp -> MoveUp }
+    edge { SetMotionDown -> MoveDown }
+    edge { MoveUp -> MoveUp }
+    edge { MoveDown -> MoveDown }
+    edge { MoveDown -> L0 where f == 0 && (c0 || l0_u); }
+    edge { MoveUp -> L1 where f == 1 && (c1 || l1_d); }
+    edge { MoveDown -> L1 where f == 1 && (c1 || l1_u); }
+    edge { MoveUp -> L2 where f == 2 && (c2 || l2_d); }
+    edge { MoveDown -> L2 where f == 2 && (c2 || l2_u); }
+    edge { MoveUp -> L3 where f == 3 && (c3 || l3_d); }
+    edge { L0 -> DoorOpen }
+    edge { L1 -> DoorOpen }
+    edge { L2 -> DoorOpen }
+    edge { L3 -> DoorOpen }
+
+    goal{
+        assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==3
+            && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
+            && !initial(l3_d) && initial(DIR)==#DOWN);
+
+        check upto 15 condition (L0) reach (CC,LC,L0,L1,L2,L3)
+    }
+}
