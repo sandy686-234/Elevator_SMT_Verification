@@ -1,0 +1,319 @@
+
+option-trace=true;
+graph Elevator{
+    const int FLOORS=20;
+
+    // Landing call buttons for each floor
+    bool l0_u, l0_d;
+    bool l1_u, l1_d;
+    bool l2_u, l2_d;
+    bool l3_u, l3_d;
+    bool l4_u, l4_d;
+    bool l5_u, l5_d;
+    bool l6_u, l6_d;
+    bool l7_u, l7_d;
+    bool l8_u, l8_d;
+    bool l9_u, l9_d;
+    bool l10_u, l10_d;
+    bool l11_u, l11_d;
+    bool l12_u, l12_d;
+    bool l13_u, l13_d;
+    bool l14_u, l14_d;
+    bool l15_u, l15_d;
+    bool l16_u, l16_d;
+    bool l17_u, l17_d;
+    bool l18_u, l18_d;
+    bool l19_u, l19_d;
+
+    // Car call buttons
+    bool c0;
+    bool c1;
+    bool c2;
+    bool c3;
+    bool c4;
+    bool c5;
+    bool c6;
+    bool c7;
+    bool c8;
+    bool c9;
+    bool c10;
+    bool c11;
+    bool c12;
+    bool c13;
+    bool c14;
+    bool c15;
+    bool c16;
+    bool c17;
+    bool c18;
+    bool c19;
+
+    enum {UP, DOWN, NA} DIR;
+    int f where f >= 0 && f <= FLOORS - 1; // Current floor
+
+    normal node DoorOpen {}
+    normal node MoveUp { f++; }
+    normal node MoveDown { f--; }
+
+    normal node CC {}
+    normal start node LC {}
+
+    normal node SetMotionUp { DIR = #UP; }
+    normal node SetMotionDown { DIR = #DOWN; }
+    normal node SetIdle { DIR = #NA; }
+
+    // Initialize state for each floor
+    normal node L0 {
+        c0 = false;
+        l0_u = false;
+        l0_d = false;
+    }
+    normal node L1 {
+        c1 = false;
+        l1_u = false;
+        l1_d = false;
+    }
+    normal node L2 {
+        c2 = false;
+        l2_u = false;
+        l2_d = false;
+    }
+    normal node L3 {
+        c3 = false;
+        l3_u = false;
+        l3_d = false;
+    }
+    normal node L4 {
+        c4 = false;
+        l4_u = false;
+        l4_d = false;
+    }
+    normal node L5 {
+        c5 = false;
+        l5_u = false;
+        l5_d = false;
+    }
+    normal node L6 {
+        c6 = false;
+        l6_u = false;
+        l6_d = false;
+    }
+    normal node L7 {
+        c7 = false;
+        l7_u = false;
+        l7_d = false;
+    }
+    normal node L8 {
+        c8 = false;
+        l8_u = false;
+        l8_d = false;
+    }
+    normal node L9 {
+        c9 = false;
+        l9_u = false;
+        l9_d = false;
+    }
+    normal node L10 {
+        c10 = false;
+        l10_u = false;
+        l10_d = false;
+    }
+    normal node L11 {
+        c11 = false;
+        l11_u = false;
+        l11_d = false;
+    }
+    normal node L12 {
+        c12 = false;
+        l12_u = false;
+        l12_d = false;
+    }
+    normal node L13 {
+        c13 = false;
+        l13_u = false;
+        l13_d = false;
+    }
+    normal node L14 {
+        c14 = false;
+        l14_u = false;
+        l14_d = false;
+    }
+    normal node L15 {
+        c15 = false;
+        l15_u = false;
+        l15_d = false;
+    }
+    normal node L16 {
+        c16 = false;
+        l16_u = false;
+        l16_d = false;
+    }
+    normal node L17 {
+        c17 = false;
+        l17_u = false;
+        l17_d = false;
+    }
+    normal node L18 {
+        c18 = false;
+        l18_u = false;
+        l18_d = false;
+    }
+    normal node L19 {
+        c19 = false;
+        l19_u = false;
+        l19_d = false;
+    }
+
+    final normal node DoorClose {}
+
+    edge { LC -> DoorOpen 
+        where (f == 0 && (l0_u || l0_d)) ||
+              (f == 1 && (l1_u || l1_d)) ||
+              (f == 2 && (l2_u || l2_d)) ||
+              (f == 3 && (l3_u || l3_d)) ||
+              (f == 4 && (l4_u || l4_d)) ||
+              (f == 5 && (l5_u || l5_d)) ||
+              (f == 6 && (l6_u || l6_d)) ||
+              (f == 7 && (l7_u || l7_d)) ||
+              (f == 8 && (l8_u || l8_d)) ||
+              (f == 9 && (l9_u || l9_d)) ||
+              (f == 10 && (l10_u || l10_d)) ||
+              (f == 11 && (l11_u || l11_d)) ||
+              (f == 12 && (l12_u || l12_d)) ||
+              (f == 13 && (l13_u || l13_d)) ||
+              (f == 14 && (l14_u || l14_d)) ||
+              (f == 15 && (l15_u || l15_d)) ||
+              (f == 16 && (l16_u || l16_d)) ||
+              (f == 17 && (l17_u || l17_d)) ||
+              (f == 18 && (l18_u || l18_d)) ||
+              (f == 19 && (l19_u || l19_d));
+    }
+
+    edge { LC -> SetMotionUp
+        where (
+            (f == 0 && (l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 1 && (l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 2 && (l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 3 && (l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 4 && (l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 5 && (l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 6 && (l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 7 && (l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 8 && (l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 9 && (l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 10 && (l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 11 && (l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 12 && (l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 13 && (l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 14 && (l15_u || l16_u || l17_u || l18_u || l19_u || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 15 && (l16_u || l17_u || l18_u || l19_u || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 16 && (l17_u || l18_u || l19_u || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 17 && (l18_u || l19_u || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
+            (f == 18 && (l19_u || l19_d) && (DIR == #UP || DIR == #NA))         );
+    }
+
+    edge { LC -> SetMotionDown
+        where (
+            (f == 19 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 18 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 17 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 16 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 15 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 14 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 13 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 12 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 11 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 10 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 9 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 8 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 7 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 6 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 5 && (l0_d || l1_d || l2_d || l3_d || l4_d || l0_u || l1_u || l2_u || l3_u || l4_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 4 && (l0_d || l1_d || l2_d || l3_d || l0_u || l1_u || l2_u || l3_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 3 && (l0_d || l1_d || l2_d || l0_u || l1_u || l2_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 2 && (l0_d || l1_d || l0_u || l1_u) && (DIR == #DOWN || DIR == #NA)) ||
+            (f == 1 && (l0_d || l0_u) && (DIR == #DOWN || DIR == #NA))         );
+    }
+
+    edge { DoorOpen -> CC }
+    edge { CC -> DoorClose }
+    edge { DoorClose -> SetMotionUp
+        where (DIR == #UP && f < FLOORS-1);
+    }
+    edge { DoorClose -> SetMotionDown
+        where (DIR == #DOWN && f > 0);
+    }
+
+    edge { DoorClose -> SetIdle where 
+        (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7 && !c8 && !c9 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c16 && !c17 && !c18 && !c19);
+    }
+    edge { SetMotionUp -> MoveUp }
+    edge { SetMotionDown -> MoveDown }
+    edge { MoveUp -> MoveUp }
+    edge { MoveDown -> MoveDown }
+    edge { MoveDown -> L0 where f == 0 && (c0 || l0_u); }
+    edge { MoveUp -> L1 where f == 1 && (c1 || l1_d); }
+    edge { MoveDown -> L1 where f == 1 && (c1 || l1_u); }
+    edge { MoveUp -> L2 where f == 2 && (c2 || l2_d); }
+    edge { MoveDown -> L2 where f == 2 && (c2 || l2_u); }
+    edge { MoveUp -> L3 where f == 3 && (c3 || l3_d); }
+    edge { MoveDown -> L3 where f == 3 && (c3 || l3_u); }
+    edge { MoveUp -> L4 where f == 4 && (c4 || l4_d); }
+    edge { MoveDown -> L4 where f == 4 && (c4 || l4_u); }
+    edge { MoveUp -> L5 where f == 5 && (c5 || l5_d); }
+    edge { MoveDown -> L5 where f == 5 && (c5 || l5_u); }
+    edge { MoveUp -> L6 where f == 6 && (c6 || l6_d); }
+    edge { MoveDown -> L6 where f == 6 && (c6 || l6_u); }
+    edge { MoveUp -> L7 where f == 7 && (c7 || l7_d); }
+    edge { MoveDown -> L7 where f == 7 && (c7 || l7_u); }
+    edge { MoveUp -> L8 where f == 8 && (c8 || l8_d); }
+    edge { MoveDown -> L8 where f == 8 && (c8 || l8_u); }
+    edge { MoveUp -> L9 where f == 9 && (c9 || l9_d); }
+    edge { MoveDown -> L9 where f == 9 && (c9 || l9_u); }
+    edge { MoveUp -> L10 where f == 10 && (c10 || l10_d); }
+    edge { MoveDown -> L10 where f == 10 && (c10 || l10_u); }
+    edge { MoveUp -> L11 where f == 11 && (c11 || l11_d); }
+    edge { MoveDown -> L11 where f == 11 && (c11 || l11_u); }
+    edge { MoveUp -> L12 where f == 12 && (c12 || l12_d); }
+    edge { MoveDown -> L12 where f == 12 && (c12 || l12_u); }
+    edge { MoveUp -> L13 where f == 13 && (c13 || l13_d); }
+    edge { MoveDown -> L13 where f == 13 && (c13 || l13_u); }
+    edge { MoveUp -> L14 where f == 14 && (c14 || l14_d); }
+    edge { MoveDown -> L14 where f == 14 && (c14 || l14_u); }
+    edge { MoveUp -> L15 where f == 15 && (c15 || l15_d); }
+    edge { MoveDown -> L15 where f == 15 && (c15 || l15_u); }
+    edge { MoveUp -> L16 where f == 16 && (c16 || l16_d); }
+    edge { MoveDown -> L16 where f == 16 && (c16 || l16_u); }
+    edge { MoveUp -> L17 where f == 17 && (c17 || l17_d); }
+    edge { MoveDown -> L17 where f == 17 && (c17 || l17_u); }
+    edge { MoveUp -> L18 where f == 18 && (c18 || l18_d); }
+    edge { MoveDown -> L18 where f == 18 && (c18 || l18_u); }
+    edge { MoveUp -> L19 where f == 19 && (c19 || l19_d); }
+    edge { L0 -> DoorOpen }
+    edge { L1 -> DoorOpen }
+    edge { L2 -> DoorOpen }
+    edge { L3 -> DoorOpen }
+    edge { L4 -> DoorOpen }
+    edge { L5 -> DoorOpen }
+    edge { L6 -> DoorOpen }
+    edge { L7 -> DoorOpen }
+    edge { L8 -> DoorOpen }
+    edge { L9 -> DoorOpen }
+    edge { L10 -> DoorOpen }
+    edge { L11 -> DoorOpen }
+    edge { L12 -> DoorOpen }
+    edge { L13 -> DoorOpen }
+    edge { L14 -> DoorOpen }
+    edge { L15 -> DoorOpen }
+    edge { L16 -> DoorOpen }
+    edge { L17 -> DoorOpen }
+    edge { L18 -> DoorOpen }
+    edge { L19 -> DoorOpen }
+
+    goal{
+        assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==10
+            && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
+            && !initial(l3_d) && initial(DIR)==#DOWN);
+
+        check for 10 condition (L0) reach (CC,LC,L0,L1,L2,L3)
+    }
+}
