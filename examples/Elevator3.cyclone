@@ -1,0 +1,177 @@
+
+option-trace=true;
+graph Elevator{
+    const int FLOORS=3;
+
+    //landing call buttons
+    bool l0_u;
+    bool l1_u, l1_d;
+    bool l2_d;
+
+    //car call buttons
+    bool c0;
+    bool c1;
+    bool c2;
+
+    enum {UP,DOWN,NA} DIR;
+    int f where f >= 0 && f <= FLOORS - 1; //current floor
+
+   final normal node DoorOpen{}
+   final normal node MoveUp{f++;}
+   final normal node MoveDown{f--;}
+
+    //car call
+    final normal node CC{}
+    final normal start node LC{}
+
+    final normal node SetMotionUp{DIR=#UP;}
+    final normal node SetMotionDown{DIR=#DOWN;}
+    final normal node SetIdle{DIR=#NA;}
+
+    // 初始化楼层状态
+    final normal node L0 {
+        c0 = false;
+        l0_u = false;
+    }
+    final normal node L1 {
+        c1 = false;
+        l1_u = false;
+        l1_d = false;
+    }
+    final normal node L2 {
+        c2 = false;
+        l2_d = false;
+    }
+
+    final normal node DoorClose{}
+    edge { LC -> DoorOpen 
+    where (f == 0 && l0_u) ||
+           (f == 1 && (l1_u || l1_d)) ||
+           (f == 2 && l2_d);
+    }
+    edge { LC -> L0 where f == 0 && l0_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #UP || DIR == #NA) && l1_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #DOWN || DIR == #NA) && l1_d; }
+    edge { LC -> L2 where f == 2 && l2_d; }
+
+    edge { LC -> SetMotionUp
+    where (
+(f == 0 && (l1_u || l1_d  || l2_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 1 && (l2_d) && (DIR == #UP || DIR == #NA))
+    );
+    }
+
+    edge { LC -> SetMotionDown
+    where (
+(f == 2 && (l1_d || l1_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 1 && (l0_u) && (DIR == #DOWN || DIR == #NA))
+    );
+    }
+
+    edge { LC -> DoorOpen
+       where (f == 0 && c0) ||
+             (f == 1 && c1) ||
+             (f == 2 && c2);
+    }
+
+    edge { DoorOpen -> CC }
+    edge { CC -> DoorClose }
+
+    // Continue upward or change direction to upward
+    edge { DoorClose -> SetMotionUp
+        where (
+            ((DIR == #UP || DIR == #NA)&& 
+                (
+                    (f == 0 && (c1 || c2 || l1_u || l2_d)) ||
+                    (f == 1 && (c2 || l2_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA) &&
+                (
+                    (f == 0 && (c1 || c2 || l1_d || l2_d || l1_u)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || l2_d)))
+            )
+        );
+    }
+
+
+    // Continue downward or change direction to downward
+    edge { DoorClose -> SetMotionDown
+        where (
+            ((DIR == #UP || DIR == #NA) && 
+                (
+                    (f == 1 && !(c2 || l2_d) && (c0 || l0_u)) ||
+                    (f == 2 && (c0 || l0_u || c1 || l1_u || l1_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA)&&
+                (
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
+            )
+        );
+    }
+
+
+
+    edge { DoorClose -> SetIdle where 
+        (!c0 && !c1 && !c2) || 
+        (f == 0 && c0) || 
+        (f == 1 && c1) || 
+        (f == 2 && c2);
+    }
+    edge { SetIdle -> L0 where f == 0 && (c0 || l0_u); }
+    edge { SetIdle -> L1 where f == 1 && (c1 || (l1_u || l1_d)); }
+    edge { SetIdle -> L2 where f == 2 && (c2 || l2_d); }
+
+    edge { SetIdle -> SetMotionUp
+     where (
+            ((DIR == #UP || DIR == #NA)&& 
+                (
+                    (f == 0 && (c1 || c2 || l1_u || l2_d)) ||
+                    (f == 1 && (c2 || l2_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA) &&
+                (
+                    (f == 0 && (c1 || c2 || l1_u || l1_d || l2_d)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || l2_d)))
+            )
+        );
+    }
+
+    // 修改 SetIdle -> SetMotionDown 的逻辑
+    edge { SetIdle -> SetMotionDown
+  where (
+            ((DIR == #UP || DIR == #NA) && 
+                (
+                    (f == 1 && !(c2 || l2_d) && (c0 || l0_u)) ||
+                    (f == 2 && (c0 || c1 || l0_u || l1_u || l1_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA)&&
+                (
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
+            )
+        );
+    }
+
+    edge { SetMotionUp -> MoveUp }
+    edge { MoveUp -> MoveUp }
+    edge { MoveUp -> L1 where f == 1 && ((l1_u && DIR == #UP) || c1 ); }
+    edge { MoveUp -> L2 where f == 2 && ((l2_d && DIR == #UP) || c2 ); }
+
+    edge { SetMotionDown -> MoveDown }
+    edge { MoveDown -> MoveDown }
+    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
+    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
+    edge { L0 -> DoorOpen }
+    edge { L1 -> DoorOpen }
+    edge { L2 -> DoorOpen }
+
+    goal{
+        assert ( initial(c0) && !initial(c1) && !initial(c2) && initial(f)==1
+                && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) 
+            && initial(DIR)==#DOWN
+                );
+
+         check for 17 condition (L0)
+    }
+}
