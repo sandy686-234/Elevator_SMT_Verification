@@ -4,18 +4,22 @@ graph Elevator{
 
     //landing call buttons
     bool l0_u;
-    bool l1_u,l1_d;
-    bool l2_u,l2_d;
+    bool l1_u, l1_d;
+    bool l2_u, l2_d;
     bool l3_d;
 
     //car call buttons
-    bool c0,c1,c2,c3;
-    enum{UP,DOWN,OFF} DIR;
-    int d0 where d0>=0 && d0<=FLOORS-1; //current floor
+    bool c0;
+    bool c1;
+    bool c2;
+    bool c3;
+
+    enum {UP,DOWN,NA} DIR;
+    int f where f >= 0 && f <= FLOORS - 1; //current floor
 
    final normal node DoorOpen{}
-   final normal node MoveUp{d0++;}
-   final normal node MoveDown{d0--;}
+   final normal node MoveUp{f++;}
+   final normal node MoveDown{f--;}
 
     //car call
     final normal node CC{}
@@ -23,212 +27,172 @@ graph Elevator{
 
     final normal node SetMotionUp{DIR=#UP;}
     final normal node SetMotionDown{DIR=#DOWN;}
-    final normal node SetIdle{DIR=#OFF;}
+    final normal node SetIdle{DIR=#NA;}
 
-    //ground floor
-    final normal node L0{
-        c0=false;
-        l0_u=false;
+    // 初始化楼层状态
+    final normal node L0 {
+        c0 = false;
+        l0_u = false;
     }
-    final normal node L1{
-        c1=false;
-        l1_u=false;
-        l1_d=false;
+    final normal node L1 {
+        c1 = false;
+        l1_u = false;
+        l1_d = false;
+    }
+    final normal node L2 {
+        c2 = false;
+        l2_u = false;
+        l2_d = false;
+    }
+    final normal node L3 {
+        c3 = false;
+        l3_d = false;
     }
 
-    final normal node L2{
-        c2=false;
-        l2_u=false;
-        l2_d=false;
-    }
-    
-    final normal node L3{
-        c3=false;
-        l3_d=false; 
-    }
-    
     final normal node DoorClose{}
-    /** Fixed by Hao Wu
-     * each LC can directly go to a specific floor if the current floor matches a LC at that floor.
-     * this allows each floor to switch cc off, otherwise cc won't is not turned off.
-     * For example, if d0==0 && l0_u, then LC -> L0.
-     */
     edge { LC -> DoorOpen 
-    where (d0==0 && l0_u) ||
-          (d0==1 && (l1_u || l1_d)) ||
-          (d0==2 && (l2_u || l2_d)) ||
-          (d0==3 && (l3_d));
+    where (f == 0 && l0_u) ||
+           (f == 1 && (l1_u || l1_d)) ||
+           (f == 2 && (l2_u || l2_d)) ||
+           (f == 3 && l3_d);
     }
-    
-    edge { LC -> L0 where d0==0 && l0_u; }
-    edge { LC -> L1 where d0==1 && (DIR==#UP || DIR==#OFF) && (l1_u); }
-    edge { LC -> L1 where d0==1 && (DIR==#DOWN || DIR==#OFF) && (l1_d);}
-    edge { LC -> L2 where d0==2 && (DIR==#UP || DIR==#OFF) && (l2_u);}
-    edge { LC -> L2 where d0==2 && (DIR==#DOWN || DIR==#OFF) && (l2_d);}
-    edge { LC -> L3 where d0==3 && l3_d; }
+    edge { LC -> L0 where f == 0 && l0_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #UP || DIR == #NA) && l1_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #DOWN || DIR == #NA) && l1_d; }
+    edge { LC -> L2 where f == 2 && (DIR == #UP || DIR == #NA) && l2_u; }
+    edge { LC -> L2 where f == 2 && (DIR == #DOWN || DIR == #NA) && l2_d; }
+    edge { LC -> L3 where f == 3 && l3_d; }
 
     edge { LC -> SetMotionUp
-    where (d0==0 && (l1_u || l2_u || l2_d || l3_d || l1_d) && (DIR==#UP || DIR==#OFF)) ||
-          (d0==1 && (l2_u || l2_d || l3_d) && (DIR==#UP || DIR==#OFF)) ||
-          (d0==2 && l3_d && (DIR==#UP || DIR==#OFF));
+    where (
+(f == 0 && (l1_u || l1_d  || l2_u || l2_d  || l3_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 1 && (l2_u || l2_d  || l3_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 2 && (l3_d) && (DIR == #UP || DIR == #NA))
+    );
     }
 
     edge { LC -> SetMotionDown
-    where (d0==3 && (l1_d || l2_d || l0_u || l1_u || l2_u) && (DIR==#DOWN || DIR==#OFF)) ||
-          (d0==2 && (l1_d || l0_u || l1_u) && (DIR==#DOWN || DIR==#OFF)) ||
-          (d0==1 && l0_u && (DIR==#DOWN || DIR==#OFF));
+    where (
+(f == 3 && (l1_d || l1_u || l2_d || l2_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 2 && (l1_d || l1_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 1 && (l0_u) && (DIR == #DOWN || DIR == #NA))
+    );
     }
 
     edge { LC -> DoorOpen
-       where (d0==0 && c0) ||
-             (d0==1 && c1) ||
-             (d0==2 && c2) ||
-             (d0==3 && c3);
+       where (f == 0 && c0) ||
+             (f == 1 && c1) ||
+             (f == 2 && c2) ||
+             (f == 3 && c3);
     }
+
     edge { DoorOpen -> CC }
     edge { CC -> DoorClose }
-   
 
     // Continue upward or change direction to upward
     edge { DoorClose -> SetMotionUp
         where (
-            ((DIR == #UP || DIR == #OFF)&& 
+            ((DIR == #UP || DIR == #NA)&& 
                 (
-                    (d0 == 0 && (c1 || c2 || c3 || l1_u || l2_u || l3_d)) ||
-                    (d0 == 1 && (c2 || c3 || l2_u || l3_d)) ||
-                    (d0 == 2 && (c3 || l3_d))
-                )
+                    (f == 0 && (c1 || c2 || c3 || l1_u || l2_u || l3_d)) ||
+                    (f == 1 && (c2 || c3 || l2_u || l3_d)) ||
+                    (f == 2 && (c3 || l3_d)))
             ) ||
-            ((DIR == #DOWN || DIR ==#OFF) &&
+            ((DIR == #DOWN || DIR ==#NA) &&
                 (
-                    (d0 == 0 && (c1 || c2 || c3 || l1_u || l1_d || l2_u || l2_d || l3_d)) ||
-                    (d0 == 1 && !(c0 || l0_u) && (c2 || c3 || l2_u || l2_d || l3_d)) ||
-                    (d0 == 2 && !(c0 || l0_u || c1 || l1_u || l1_d) && (c3 || l3_d))
-                )
+                    (f == 0 && (c1 || c2 || c3 || l1_d || l2_d || l3_d || l1_u || l2_u)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || c3 || l2_d || l3_d || l2_u)) ||
+                    (f == 2 && !(c0 || l0_u || c1 || l1_d || l1_u) && (c3 || l3_d)))
             )
         );
     }
-
-
 
 
     // Continue downward or change direction to downward
     edge { DoorClose -> SetMotionDown
         where (
-            ((DIR == #UP || DIR == #OFF) && 
+            ((DIR == #UP || DIR == #NA) && 
                 (
-                    (d0 == 1 && !(c2 || c3 || l2_u || l2_d || l3_d) && (c0 || l0_u)) ||
-                    (d0 == 2 && !(c3 || l3_d) && (c0 || l0_u || c1 || l1_u || l1_d)) ||
-                    (d0 == 3 && (c1 || c2 || c0 || l1_u || l1_d || l2_u || l2_d || l0_u))
-                )
+                    (f == 1 && !(c2 || l2_u || l2_d || c3 || l3_d) && (c0 || l0_u)) ||
+                    (f == 2 && !(c3 || l3_d) && (c0 || l0_u || c1 || l1_u || l1_d)) ||
+                    (f == 3 && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d)))
             ) ||
-            ((DIR == #DOWN || DIR ==#OFF)&&
+            ((DIR == #DOWN || DIR ==#NA)&&
                 (
-                    ((d0 == 3) && (c0 || c1 || c2 || l2_d || l1_d || l0_u)) ||
-                    ((d0 == 2) && (c0 || c1 || l1_d || l0_u)) ||
-                    ((d0 == 1) && (c0 || l0_u)) 
-
-                )
+                    (f == 3 && (c0 || c1 || c2 || l1_d || l2_d || l0_u)) ||
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
             )
         );
     }
+
 
 
     edge { DoorClose -> SetIdle where 
         (!c0 && !c1 && !c2 && !c3) || 
-        (d0==0 && c0) || 
-        (d0==1 && c1) || 
-        (d0==2 && c2) || 
-        (d0==3 && c3);
-    } 
-    edge { SetIdle -> L0 where d0==0 && (c0  || (l0_u)); } 
-    edge { SetIdle -> L1 where d0==1 && (c1 || (l1_u) || (l1_d)); } 
-    edge { SetIdle -> L2 where d0==2 && (c2 || (l2_u) || (l2_d)); } 
-    edge { SetIdle -> L3 where d0==3 && (c3 || (l3_d)); }
+        (f == 0 && c0) || 
+        (f == 1 && c1) || 
+        (f == 2 && c2) || 
+        (f == 3 && c3);
+    }
+    edge { SetIdle -> L0 where f == 0 && (c0 || l0_u); }
+    edge { SetIdle -> L1 where f == 1 && (c1 || (l1_u || l1_d)); }
+    edge { SetIdle -> L2 where f == 2 && (c2 || (l2_u || l2_d)); }
+    edge { SetIdle -> L3 where f == 3 && (c3 || l3_d); }
 
-
-    edge {SetIdle -> SetMotionUp
+    edge { SetIdle -> SetMotionUp
      where (
-            ((DIR == #UP || DIR == #OFF)&& 
+            ((DIR == #UP || DIR == #NA)&& 
                 (
-                    (d0 == 0 && (c1 || c2 || c3 || l1_u || l2_u || l3_d)) ||
-                    (d0 == 1 && (c2 || c3 || l2_u || l3_d)) ||
-                    (d0 == 2 && (c3 || l3_d))
-                )
+                    (f == 0 && (c1 || c2 || c3 || l1_u || l2_u || l3_d)) ||
+                    (f == 1 && (c2 || c3 || l2_u || l3_d)) ||
+                    (f == 2 && (c3 || l3_d)))
             ) ||
-            ((DIR == #DOWN || DIR ==#OFF) &&
+            ((DIR == #DOWN || DIR ==#NA) &&
                 (
-                    (d0 == 0 && (c1 || c2 || c3 || l1_u || l1_d || l2_u || l2_d || l3_d)) ||
-                    (d0 == 1 && !(c0 || l0_u) && (c2 || c3 || l2_u || l2_d || l3_d)) ||
-                    (d0 == 2 && !(c0 || l0_u || c1 || l1_u || l1_d) && (c3 || l3_d))
-                )
+                    (f == 0 && (c1 || c2 || c3 || l1_u || l1_d || l2_u || l2_d || l3_d)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || c3 || l2_u || l2_d || l3_d)) ||
+                    (f == 2 && !(c0 || c1 || l0_u || l1_u || l1_d) && (c3 || l3_d)))
             )
         );
     }
 
+    // 修改 SetIdle -> SetMotionDown 的逻辑
     edge { SetIdle -> SetMotionDown
   where (
-            ((DIR == #UP || DIR == #OFF) && 
+            ((DIR == #UP || DIR == #NA) && 
                 (
-                    (d0 == 1 && !(c2 || c3 || l2_u || l2_d || l3_d) && (c0 || l0_u)) ||
-                    (d0 == 2 && !(c3 || l3_d) && (c0 || l0_u || c1 || l1_u || l1_d)) ||
-                    (d0 == 3 && (c1 || c2 || c0 || l1_u || l1_d || l2_u || l2_d || l0_u))
-                )
+                    (f == 1 && !(c2 || l2_u || l2_d || c3 || l3_d) && (c0 || l0_u)) ||
+                    (f == 2 && !(c3 || l3_d) && (c0 || c1 || l0_u || l1_u || l1_d)) ||
+                    (f == 3 && (c0 || c1 || c2 || l0_u || l1_u || l1_d || l2_u || l2_d)))
             ) ||
-            ((DIR == #DOWN || DIR ==#OFF)&&
+            ((DIR == #DOWN || DIR ==#NA)&&
                 (
-                    ((d0 == 3) && (c0 || c1 || c2 || l2_d || l1_d || l0_u)) ||
-                    ((d0 == 2) && (c0 || c1 || l1_d || l0_u)) ||
-                    ((d0 == 1) && (c0 || l0_u)) 
-
-                )
+                    (f == 3 && (c0 || c1 || c2 || l1_d || l2_d || l0_u)) ||
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
             )
         );
     }
-
 
     edge { SetMotionUp -> MoveUp }
     edge { MoveUp -> MoveUp }
-    edge { MoveUp -> L1 where d0==1 && ((l1_u && DIR==#UP) || c1); }
-    edge { MoveUp -> L2 where d0==2 && ((l2_u && DIR==#UP) || c2); }
-    edge { MoveUp -> L3 where d0==3 && ((l3_d && DIR==#UP) || c3); }
-    
+    edge { MoveUp -> L1 where f == 1 && ((l1_u && DIR == #UP) || c1 ); }
+    edge { MoveUp -> L2 where f == 2 && ((l2_u && DIR == #UP) || c2 ); }
+    edge { MoveUp -> L3 where f == 3 && ((l3_d && DIR == #UP) || c3 ); }
+
     edge { SetMotionDown -> MoveDown }
     edge { MoveDown -> MoveDown }
-    edge { MoveDown -> L2 where d0==2 && ((l2_d && (DIR==#DOWN)) || c2); }
-    edge { MoveDown -> L1 where d0==1 && ((l1_d && (DIR==#DOWN)) || c1); }
-    edge { MoveDown -> L0 where d0==0 && ((l0_u && (DIR==#DOWN)) || c0); }
-    
+    edge { MoveDown -> L2 where f == 2 && (l2_d && DIR == #DOWN) || c2; }
+    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
+    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
     edge { L0 -> DoorOpen }
     edge { L1 -> DoorOpen }
     edge { L2 -> DoorOpen }
     edge { L3 -> DoorOpen }
- /**
- *  Definition description:
- *  Let D represent the current direction of the elavator (up is positive, down is negative)
- *  K represents the key direcrion(up is positive,down is negative)
- *  1.D*K<0 (the directions of D and K are opposite).
- *  2.D*K>0(D and K directions are the same).
- *  3.Dmax:D>=0; Dmin: D< -0
- *  4.D'= -D(D' represents the new state of the elevator after changing direction, and D
- *   represents the original elevator direction).
- *  5. !Lighting status =setdIe
- */
+
     goal{
-        
-         //assert (initial(c0) && !initial(c1) && !initial(c2) && initial(c3) && initial(d0)==3 
-        // && !initial(l0_u) && !initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
-        // && !initial(l3_d) && initial(DIR)==#DOWN);
-
-        //assert (!initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==1 
-         //&& !initial(l0_u) && !initial(l1_u) && !initial(l1_d) && !initial(l2_d) && initial(l2_u) 
-         //&& initial(l3_d) && initial(DIR)==#DOWN);
-
-        /*assert (!initial(c0) && !initial(c1) && initial(c2) && !initial(c3) && initial(d0)==3 
-         && !initial(l0_u) && !initial(l1_u) && !initial(l1_d) && !initial(l2_d) && !initial(l2_u) 
-         && initial(l3_d) && initial(DIR)==#OFF);*/
-
-        assert ( initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==3
+        assert ( initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==3
                 && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u)
                 && !initial(l3_d) && initial(DIR)==#DOWN
                 );
@@ -236,86 +200,3 @@ graph Elevator{
          check for 17 condition (L0) reach (CC,LC,L0,L1,L2,L3)
     }
 }
-
-/*
-         //assert (!initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==2 
-         //&& initial(l0_u) && !initial(l1_u) && !initial(l1_d) && !initial(l2_d) && !initial(l2_u) 
-         //&& initial(l3_d) && initial(DIR)==#UP);
-
-         //assert (!initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==0 
-         //&& !initial(l0_u) && initial(l1_u) && !initial(l1_d) && !initial(l2_d) && initial(l2_u) 
-         //&& !initial(l3_d) && initial(DIR)==#OFF);
-
-        //assert (initial(c0) && !initial(c1) && initial(c2) && !initial(c3) && initial(d0)==3
-        //&& !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
-        //&& !initial(l3_d) && initial(DIR)==#DOWN);
-
-         //assert (initial(c0) && initial(c1) && !initial(c2) && initial(c3) && initial(d0)==2
-         //&& !initial(l0_u) && !initial(l1_u) && !initial(l1_d) && initial(l2_d) && initial(l2_u) 
-         //&& !initial(l3_d) && initial(DIR)==#DOWN);
-
-         assert (initial(c0) && !initial(c1) && !initial(c2) && initial(c3) && initial(d0)==1
-         && !initial(l0_u) && !initial(l1_u) && !initial(l1_d) && !initial(l2_d) && initial(l2_u) 
-         && !initial(l3_d) && initial(DIR)==#UP);
-
-         //check for 13
-    }
-}
-*/
-
-        //1
-        /*assert (
-        (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==1
-        && (initial(l0_u) || initial(l1_u) || initial(l2_u))) 
-        || 
-        (initial(c0) || initial(c1) || initial(c2)) && !initial(c3) && initial(d0)==3 
-        && (initial(l0_u) || initial(l1_u) || initial(l2_u))
-        ||
-        (initial(c0) || initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==2 
-        && (initial(l0_u) || initial(l1_u) || initial(l2_u)))
-        && initial(DIR)==#DOWN);*/
-  
-        /* assert (
-
-            (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==1
-        && (initial(l0_u) || initial(l1_u) || initial(l2_u))) 
-        ||
-            (initial(c0) || initial(c1) || initial(c2)) && !initial(c3) && initial(d0)==3 
-            && (initial(l0_u) || initial(l1_u) || initial(l2_u))
-        ||
-        (initial(c0) || initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==2 
-        && (initial(l0_u) || initial(l1_u) || initial(l2_u)))
-        );
-
-        assert (initial(d0)!=0);
-        assert (initial(DIR)==#DOWN);        
-        check for 15 condition(MoveUp ->L1 || MoveUp->L2 || MoveUp->L3)
-
-    }
-}
-*/
-
-
-         /*  assert (
-              (!initial(c0) && !initial(c1) && !initial(c2) && initial(c3) && initial(d0)==2
-          && (initial(l1_d) || initial(l2_d) || initial(l3_d)))
-        ||
-
-            (!initial(c0) && !initial(c1) && initial(c2) && initial(c3) && initial(d0)==1
-           && (initial(l1_d) || initial(l2_d) || initial(l3_d)))
-        ||
-
-            (!initial(c0) && initial(c1) && initial(c2) && initial(c3) && initial(d0)==0
-           && (initial(l1_d) || initial(l2_d) || initial(l3_d)))
-
-         );
-         
-        
-
-        assert (initial(d0)!=3);
-        assert (initial(DIR)==#UP);
-       enumerate for 15 condition(MoveDown -> L1 || MoveDown ->L2 || MoveDown ->L3)
-       
-    }
-}
-*/
