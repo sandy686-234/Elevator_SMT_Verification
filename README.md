@@ -9,23 +9,11 @@ This project provides a formal verification framework for elevator scheduling co
 ## 🚀 Features
 
 - ✅ Finite-state modeling of elevator control logic (landing calls, car calls, direction switching)
-- ✅ Automated state machine generation for N-story buildings
-- ✅ SMT formula generation using Cyclone
-- ✅ Verification of temporal properties using Z3 solver
-- ✅ Support for stress tests up to 50-story buildings
+- ✅ Automated FSM generation with configurable parameters for buildings with any number of floors 
+- ✅ SMT formula generation with Cyclone Toos: translates FSM states, transitions, and system properties into precise SMT-LIB2 constraints
+- ✅ Formal verification powered by Z3: Cyclone-generated formulas are rigorously verified using the Z3 SMT solver (v4.13.0) through bounded model checking
+- ✅ Performance-optimized verification: includes benchmark results for verification times, with efficient modeling enabling rapid verification even for complex systems
 - 🧾 Visual documentation of formal transition logic available via ProcessOn
-
----
-
-## 🧠 Core Concepts
-
-The system models elevator scheduling as a finite-state machine and verifies properties such as:
-
-- **Request eventually served**: Every request is eventually satisfied.
-- **Valid direction change**: The elevator only changes direction when necessary.
-- **Idle behavior**: The elevator only idles when no requests are pending.
-
-These are encoded in Linear Temporal Logic (LTL) and translated to SMT formulas for automated verification.
 
 ---
 
@@ -44,7 +32,6 @@ These are encoded in Linear Temporal Logic (LTL) and translated to SMT formulas 
 ```
 
 ---
-
 ## 📄 Documentation
 
 The complete set of **formal SMT transition formulas** used in this project is available online:
@@ -53,7 +40,11 @@ The complete set of **formal SMT transition formulas** used in this project is a
 
 This includes visual state transitions, condition expressions, and logic definitions aligned with the Siemens S7-200 PLC model.
 
----
+To learn how to model and verify these logic systems using **Cyclone**, see the official tutorial:
+
+👉 [Cyclone Tutorial by Hao Wu](https://classicwuhao.github.io/cyclone_tutorial/tutorial-content.html)
+
+The tutorial demonstrates how to represent system behavior as graphs, encode safety and efficiency properties, and generate SMT formulas for verification using Z3. It serves as a helpful reference for understanding and extending the elevator verification models used in this project.
 
 ## 🔧 Requirements
 
@@ -69,26 +60,20 @@ pip install -r requirements.txt
 
 ---
 
-## ▶️ Quick Start
-
-1. Clone the repo:
-
-```bash
-git clone https://github.com/yourname/Elevator_SMT_Verification.git
+🚀 Quick Start
+1. Clone the repository:
+bashCopygit clone https://github.com/sandy686-234/Elevator_SMT_Verification.git
 cd Elevator_SMT_Verification
-```
+2. Generate Cyclone code for your elevator system:
+You can run the Python script and specify the number of levels via command-line argument:
+bashCopypython auto_fsm_generator.py --levels 10
+This will output the Cyclone model code to your terminal.
+💡 Tip: Alternatively, you can directly modify the script (e.g., change n = 10 in the code) to set the number of levels manually when working in an IDE or notebook environment.
+3. Verify using Cyclone:
 
-2. Generate an FSM for a 10-level building:
-
-```bash
-python auto_fsm_generator.py --levels 10 --output examples/fsm_10levels.smt2
-```
-
-3. Run SMT verification (requires Z3):
-
-```bash
-z3 examples/fsm_10levels.smt2
-```
+Copy the generated Cyclone code
+Open the Cyclone Online Tool [Cyclone Tutorial by Hao Wu](https://classicwuhao.github.io/cyclone_tutorial/tutorial-content.html)Paste the code into the Cyclone editor
+Click "Check" to run formal verification using Cyclone with Z3 SMT backend
 
 ---
 
