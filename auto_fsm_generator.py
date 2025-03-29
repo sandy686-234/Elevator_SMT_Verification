@@ -1,4 +1,4 @@
-_elevator_code(n):
+def generate_elevator_code(n):
     code = f"""
 option-trace=true;
 graph Elevator{{
@@ -127,7 +127,7 @@ graph Elevator{{
     for i in range(n - 1):
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
         # 最高层不添加上行条件
-        landing_conditions = [f"l{j}_u || l{j}_d" if j != n-1 else '' for j in range(i + 1, n - 1)]
+        landing_conditions = [f"l{j}_u" if j != n-1 else '' for j in range(i + 1, n - 1)]
         landing_conditions += [f"l{n-1}_d"]
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
         if conditions:
@@ -137,21 +137,42 @@ graph Elevator{{
             ) ||
             ((DIR == #DOWN || DIR ==#NA) &&
                 (
-"""
+"""""
     down_floor_conditions = []
     for i in range(n - 1):
+        # 添加否定逻辑：当前楼层以下没有请求才考虑向上
+        negative_conditions = []
+        for j in range(i):
+            negative_conditions.append(f"c{j}")
+            if j > 0:  # 最低楼层没有下行请求
+                negative_conditions.append(f"l{j}_d")
+            if j < n-1:  # 最高楼层没有上行请求
+                negative_conditions.append(f"l{j}_u")
+
+        # 当前楼层以上的请求
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
-        # 最高层不添加下行条件
-        landing_conditions = [f"l{j}_d || l{j}_u" if j != n-1 else '' for j in range(i + 1, n - 1)]
-        landing_conditions += [f"l{n-1}_d"]
+        landing_conditions = [f"l{j}_d" for j in range(i + 1, n)]
+        if i + 1 < n - 1:  # 非最高楼层前一层可以有上行请求
+            landing_conditions += [f"l{j}_u" for j in range(i + 1, n - 1)]
+
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
-        if conditions:
+
+        # 组合否定逻辑和正向条件
+        if negative_conditions and conditions:
+            # 只有当没有较低楼层请求时，才考虑响应较高楼层请求
+            down_floor_conditions.append(
+                f"(f == {i} && !({' || '.join(negative_conditions)}) && ({' || '.join(conditions)}))"
+            )
+        elif conditions:
+            # 0层没有较低楼层，不需要否定逻辑
             down_floor_conditions.append(f"(f == {i} && ({' || '.join(conditions)}))")
+
     code += "                    " + " ||\n                    ".join(down_floor_conditions)
     code += """)
             )
         );
     }
+
 
     // Continue downward or change direction to downward
     edge { DoorClose -> SetMotionDown
@@ -160,13 +181,36 @@ graph Elevator{{
                 (
 """
     up_down_conditions = []
-    for i in range(1, n):
-        car_conditions_lower = [f"c{j}" for j in range(0, i)]
-        # 最低层不添加下行条件
-        landing_conditions_lower = [f"l{j}_d" if j != 0 else '' for j in range(1, i)]
-        conditions = [cond for cond in car_conditions_lower + landing_conditions_lower if cond]
-        if conditions:
-            up_down_conditions.append(f"(f == {i} && ({' || '.join(conditions)}))")
+
+    for i in range( 1, n ):
+
+        upper_conditions = []
+        if i < n - 1:
+            for j in range( i + 1, n ):
+                upper_conditions.append( f"c{j}" )
+                if j < n - 1:
+                    upper_conditions.append( f"l{j}_u" )
+                if j > 0:
+                    upper_conditions.append( f"l{j}_d" )
+
+        not_expr = f"!({' || '.join( upper_conditions )})" if upper_conditions else ""
+
+        lower_conditions = []
+        for j in range( 0, i ):
+            lower_conditions.append( f"c{j}" )
+            if j == 0:
+                lower_conditions.append( "l0_u" )
+            else:
+                lower_conditions.append( f"l{j}_u" )
+                lower_conditions.append( f"l{j}_d" )
+
+        line = f"(f == {i} && "
+        if not_expr:
+            line += f"{not_expr} && "
+        line += f"({' || '.join( lower_conditions )}))"
+        up_down_conditions.append( line )
+
+
     code += "                    " + " ||\n                    ".join(up_down_conditions)
     code += f""")
             ) ||
@@ -187,6 +231,8 @@ graph Elevator{{
             )
         );
     }
+
+
 
     edge { DoorClose -> SetIdle where 
 """
@@ -233,11 +279,36 @@ graph Elevator{{
     down_floor_conditions = []
     for i in range(n - 1):
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
-        # 最高层不添加下行条件
-        landing_conditions = [f"l{j}_d" if j != n-1 else '' for j in range(i + 1, n - 1)]
+        landing_conditions = []
+        for j in range( i + 1, n ):
+            if j < n - 1:
+                landing_conditions.append( f"l{j}_u" )
+                landing_conditions.append( f"l{j}_d" )  
+            if j == n - 1:
+                landing_conditions.append( f"l{j}_d" )
+
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
-        if conditions:
-            down_floor_conditions.append(f"(f == {i} && ({' || '.join(conditions)}))")
+
+        if i == 0:
+
+            if conditions:
+                down_floor_conditions.append(
+                    f"(f == {i} && ({' || '.join( conditions )}))"
+                )
+        else:
+            # 构造下方请求的否定
+            lower_conditions = [f"c{j}" for j in range( 0, i )]
+            for j in range( 0, i ):
+                if j == 0:
+                    lower_conditions.append( "l0_u" )
+                else:
+                    lower_conditions.append( f"l{j}_u" )
+                    lower_conditions.append( f"l{j}_d" )
+            not_expr = f"!({' || '.join( lower_conditions )})"
+            if conditions:
+                down_floor_conditions.append(
+                    f"(f == {i} && {not_expr} && ({' || '.join( conditions )}))"
+                )
     code += "                    " + " ||\n                    ".join(down_floor_conditions)
     code += """)
             )
@@ -254,10 +325,29 @@ graph Elevator{{
     for i in range(1, n):
         car_conditions_lower = [f"c{j}" for j in range(0, i)]
         # 最低层不添加下行条件
-        landing_conditions_lower = [f"l{j}_d" if j != 0 else '' for j in range(1, i)]
-        conditions = [cond for cond in car_conditions_lower + landing_conditions_lower if cond]
-        if conditions:
-            up_down_conditions.append(f"(f == {i} && ({' || '.join(conditions)}))")
+        landing_conditions_lower = []
+        for j in range( 0, i ):
+            if j == 0:
+                landing_conditions_lower.append( "l0_u" )
+            else:
+                landing_conditions_lower.append( f"l{j}_u" )
+                landing_conditions_lower.append( f"l{j}_d" )
+        down_expr = f"({' || '.join( car_conditions_lower + landing_conditions_lower )})"
+
+        # 否定的高层请求（f > 0 且不是最高层时）
+        not_expr = ""
+        if i < n - 1:
+            upper_conditions = []
+            for j in range( i + 1, n ):
+                upper_conditions.append( f"c{j}" )
+                if j < n - 1:
+                    upper_conditions.append( f"l{j}_u" )
+                    upper_conditions.append( f"l{j}_d" )
+                if j == n - 1:
+                    upper_conditions.append( f"l{j}_d" )
+            not_expr = f"!({' || '.join( upper_conditions )}) && "
+
+        up_down_conditions.append( f"(f == {i} && {not_expr}{down_expr})" )
     code += "                    " + " ||\n                    ".join(up_down_conditions)
     code += f""")
             ) ||
