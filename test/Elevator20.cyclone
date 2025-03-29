@@ -608,10 +608,10 @@ graph Elevator{
     edge { L19 -> DoorOpen }
     
     goal{
-        assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==10
-            && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
-            && !initial(l3_d) && initial(DIR)==#DOWN);
+        assert (initial(c10) && initial(c15) && initial(c18) && initial(f)==12
+            && (initial(DIR)==#DOWN || initial(DIR)==#UP)
+            );
 
-        check for 10 condition (L0) reach (CC,LC,L0,L1,L2,L3)
+        check for 20 condition (L12) reach (L10,L15,L18)
     }
 }
