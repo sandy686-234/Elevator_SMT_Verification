@@ -867,11 +867,36 @@ graph Elevator{
     edge { L28 -> DoorOpen }
     edge { L29 -> DoorOpen }
 
-     goal{
-        assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==23
-            && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
-            && !initial(l3_d) && initial(DIR)==#DOWN);
+goal {
+    assert (
+        initial(f) == 15 &&
+        (
+            initial(c10) || initial(c11) || initial(c12) || initial(c13) || initial(c14) ||
+            initial(c15) || initial(c16) || initial(c17) || initial(c18) || initial(c19) ||
+            initial(c20) || initial(c21) || initial(c22) || initial(c23) || initial(c24) ||
+            initial(c25) || initial(c26) || initial(c27) || initial(c28) || initial(c29)
+        ) &&
+        (
+            initial(l10_u) || initial(l10_d) || initial(l11_u) || initial(l11_d) ||
+            initial(l12_u) || initial(l12_d) || initial(l13_u) || initial(l13_d) ||
+            initial(l14_u) || initial(l14_d) || initial(l15_u) || initial(l15_d) ||
+            initial(l16_u) || initial(l16_d) || initial(l17_u) || initial(l17_d) ||
+            initial(l18_u) || initial(l18_d) || initial(l19_u) || initial(l19_d) ||
+            initial(l20_u) || initial(l20_d) || initial(l21_u) || initial(l21_d) ||
+            initial(l22_u) || initial(l22_d) || initial(l23_u) || initial(l23_d) ||
+            initial(l24_u) || initial(l24_d) || initial(l25_u) || initial(l25_d) ||
+            initial(l26_u) || initial(l26_d) || initial(l27_u) || initial(l27_d) ||
+            initial(l28_u) || initial(l28_d) || initial(l29_d)
+        ) &&
+        (
+            initial(DIR) == #UP || initial(DIR) == #DOWN
+        )
+    );
 
-        check for 15 condition (L10) reach (CC,LC,L10,L11,L22,L23)
-    }
+    check for 30 condition (L15) reach (
+        L10, L11, L12, L13, L14, L15, L16, L17, L18, L19,
+        L20, L21, L22, L23, L24, L25, L26, L27, L28, L29
+    )
+}
+
 }
