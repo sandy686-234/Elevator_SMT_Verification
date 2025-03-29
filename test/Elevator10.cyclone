@@ -347,12 +347,13 @@ graph Elevator{
     edge { L8 -> DoorOpen }
     edge { L9 -> DoorOpen }
 
+  
     goal{
-        assert ( initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==3
-                && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u)
-                && !initial(l3_d) && initial(DIR)==#DOWN
-                );
+          assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(d0)==5
+        && initial(l0_u) && !initial(l1_u) && !initial(l1_d) && initial(l3_d) && !initial(l2_u) 
+        && !initial(l3_d) && initial(DIR)==#UP);
 
-         check for 17 condition (L0) reach (CC,LC,L0,L1,L2,L3)
+        check for 10 condition (L0) reach (CC,LC,L0)
     }
 }
+
