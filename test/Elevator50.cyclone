@@ -1393,8 +1393,7 @@ goal {
             initial(c25) || initial(c26) || initial(c27) || initial(c28) || initial(c29) ||
             initial(c30) || initial(c31) || initial(c32) || initial(c33) || initial(c34) ||
             initial(c35) || initial(c36) || initial(c37) || initial(c38) || initial(c39) ||
-            initial(c40) || initial(c41) || initial(c42) || initial(c43) || initial(c44) ||
-            initial(c45) || initial(c46) || initial(c47) || initial(c48) || initial(c49)
+            initial(c40) 
         ) &&
         (
             initial(l20_u) || initial(l20_d) || initial(l21_u) || initial(l21_d) ||
@@ -1407,20 +1406,12 @@ goal {
             initial(l34_u) || initial(l34_d) || initial(l35_u) || initial(l35_d) ||
             initial(l36_u) || initial(l36_d) || initial(l37_u) || initial(l37_d) ||
             initial(l38_u) || initial(l38_d) || initial(l39_u) || initial(l39_d) ||
-            initial(l40_u) || initial(l40_d) || initial(l41_u) || initial(l41_d) ||
-            initial(l42_u) || initial(l42_d) || initial(l43_u) || initial(l43_d) ||
-            initial(l44_u) || initial(l44_d) || initial(l45_u) || initial(l45_d) ||
-            initial(l46_u) || initial(l46_d) || initial(l47_u) || initial(l47_d) ||
-            initial(l48_u) || initial(l48_d) || initial(l49_d)
+            initial(l40_d) 
         ) &&
         initial(DIR) == #UP
     );
 
-    check for 50 condition (L35) reach (
-        L20, L21, L22, L23, L24, L25, L26, L27, L28, L29,
-        L30, L31, L32, L33, L34, L35, L36, L37, L38, L39,
-        L40, L41, L42, L43, L44, L45, L46, L47, L48, L49
-    )
+    check for 10 condition (L35) 
 }
 
 }
