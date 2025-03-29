@@ -3,8 +3,8 @@ option-trace=true;
 graph Elevator{
     const int FLOORS=20;
 
-    // Landing call buttons for each floor
-    bool l0_u, l0_d;
+    //landing call buttons
+    bool l0_u;
     bool l1_u, l1_d;
     bool l2_u, l2_d;
     bool l3_u, l3_d;
@@ -23,9 +23,9 @@ graph Elevator{
     bool l16_u, l16_d;
     bool l17_u, l17_d;
     bool l18_u, l18_d;
-    bool l19_u, l19_d;
+    bool l19_d;
 
-    // Car call buttons
+    //car call buttons
     bool c0;
     bool c1;
     bool c2;
@@ -47,247 +47,545 @@ graph Elevator{
     bool c18;
     bool c19;
 
-    enum {UP, DOWN, NA} DIR;
-    int f where f >= 0 && f <= FLOORS - 1; // Current floor
+    enum {UP,DOWN,NA} DIR;
+    int f where f >= 0 && f <= FLOORS - 1; //current floor
 
-    normal node DoorOpen {}
-    normal node MoveUp { f++; }
-    normal node MoveDown { f--; }
+   final normal node DoorOpen{}
+   final normal node MoveUp{f++;}
+   final normal node MoveDown{f--;}
 
-    normal node CC {}
-    normal start node LC {}
+    //car call
+    final normal node CC{}
+    final normal start node LC{}
 
-    normal node SetMotionUp { DIR = #UP; }
-    normal node SetMotionDown { DIR = #DOWN; }
-    normal node SetIdle { DIR = #NA; }
+    final normal node SetMotionUp{DIR=#UP;}
+    final normal node SetMotionDown{DIR=#DOWN;}
+    final normal node SetIdle{DIR=#NA;}
 
-    // Initialize state for each floor
-    normal node L0 {
+    // Initialize floor state
+    final normal node L0 {
         c0 = false;
         l0_u = false;
-        l0_d = false;
     }
-    normal node L1 {
+    final normal node L1 {
         c1 = false;
         l1_u = false;
         l1_d = false;
     }
-    normal node L2 {
+    final normal node L2 {
         c2 = false;
         l2_u = false;
         l2_d = false;
     }
-    normal node L3 {
+    final normal node L3 {
         c3 = false;
         l3_u = false;
         l3_d = false;
     }
-    normal node L4 {
+    final normal node L4 {
         c4 = false;
         l4_u = false;
         l4_d = false;
     }
-    normal node L5 {
+    final normal node L5 {
         c5 = false;
         l5_u = false;
         l5_d = false;
     }
-    normal node L6 {
+    final normal node L6 {
         c6 = false;
         l6_u = false;
         l6_d = false;
     }
-    normal node L7 {
+    final normal node L7 {
         c7 = false;
         l7_u = false;
         l7_d = false;
     }
-    normal node L8 {
+    final normal node L8 {
         c8 = false;
         l8_u = false;
         l8_d = false;
     }
-    normal node L9 {
+    final normal node L9 {
         c9 = false;
         l9_u = false;
         l9_d = false;
     }
-    normal node L10 {
+    final normal node L10 {
         c10 = false;
         l10_u = false;
         l10_d = false;
     }
-    normal node L11 {
+    final normal node L11 {
         c11 = false;
         l11_u = false;
         l11_d = false;
     }
-    normal node L12 {
+    final normal node L12 {
         c12 = false;
         l12_u = false;
         l12_d = false;
     }
-    normal node L13 {
+    final normal node L13 {
         c13 = false;
         l13_u = false;
         l13_d = false;
     }
-    normal node L14 {
+    final normal node L14 {
         c14 = false;
         l14_u = false;
         l14_d = false;
     }
-    normal node L15 {
+    final normal node L15 {
         c15 = false;
         l15_u = false;
         l15_d = false;
     }
-    normal node L16 {
+    final normal node L16 {
         c16 = false;
         l16_u = false;
         l16_d = false;
     }
-    normal node L17 {
+    final normal node L17 {
         c17 = false;
         l17_u = false;
         l17_d = false;
     }
-    normal node L18 {
+    final normal node L18 {
         c18 = false;
         l18_u = false;
         l18_d = false;
     }
-    normal node L19 {
+    final normal node L19 {
         c19 = false;
-        l19_u = false;
         l19_d = false;
     }
 
-    final normal node DoorClose {}
-
+    final normal node DoorClose{}
     edge { LC -> DoorOpen 
-        where (f == 0 && (l0_u || l0_d)) ||
-              (f == 1 && (l1_u || l1_d)) ||
-              (f == 2 && (l2_u || l2_d)) ||
-              (f == 3 && (l3_u || l3_d)) ||
-              (f == 4 && (l4_u || l4_d)) ||
-              (f == 5 && (l5_u || l5_d)) ||
-              (f == 6 && (l6_u || l6_d)) ||
-              (f == 7 && (l7_u || l7_d)) ||
-              (f == 8 && (l8_u || l8_d)) ||
-              (f == 9 && (l9_u || l9_d)) ||
-              (f == 10 && (l10_u || l10_d)) ||
-              (f == 11 && (l11_u || l11_d)) ||
-              (f == 12 && (l12_u || l12_d)) ||
-              (f == 13 && (l13_u || l13_d)) ||
-              (f == 14 && (l14_u || l14_d)) ||
-              (f == 15 && (l15_u || l15_d)) ||
-              (f == 16 && (l16_u || l16_d)) ||
-              (f == 17 && (l17_u || l17_d)) ||
-              (f == 18 && (l18_u || l18_d)) ||
-              (f == 19 && (l19_u || l19_d));
+    where (f == 0 && l0_u) ||
+           (f == 1 && (l1_u || l1_d)) ||
+           (f == 2 && (l2_u || l2_d)) ||
+           (f == 3 && (l3_u || l3_d)) ||
+           (f == 4 && (l4_u || l4_d)) ||
+           (f == 5 && (l5_u || l5_d)) ||
+           (f == 6 && (l6_u || l6_d)) ||
+           (f == 7 && (l7_u || l7_d)) ||
+           (f == 8 && (l8_u || l8_d)) ||
+           (f == 9 && (l9_u || l9_d)) ||
+           (f == 10 && (l10_u || l10_d)) ||
+           (f == 11 && (l11_u || l11_d)) ||
+           (f == 12 && (l12_u || l12_d)) ||
+           (f == 13 && (l13_u || l13_d)) ||
+           (f == 14 && (l14_u || l14_d)) ||
+           (f == 15 && (l15_u || l15_d)) ||
+           (f == 16 && (l16_u || l16_d)) ||
+           (f == 17 && (l17_u || l17_d)) ||
+           (f == 18 && (l18_u || l18_d)) ||
+           (f == 19 && l19_d);
     }
+    edge { LC -> L0 where f == 0 && l0_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #UP || DIR == #NA) && l1_u; }
+    edge { LC -> L1 where f == 1 && (DIR == #DOWN || DIR == #NA) && l1_d; }
+    edge { LC -> L2 where f == 2 && (DIR == #UP || DIR == #NA) && l2_u; }
+    edge { LC -> L2 where f == 2 && (DIR == #DOWN || DIR == #NA) && l2_d; }
+    edge { LC -> L3 where f == 3 && (DIR == #UP || DIR == #NA) && l3_u; }
+    edge { LC -> L3 where f == 3 && (DIR == #DOWN || DIR == #NA) && l3_d; }
+    edge { LC -> L4 where f == 4 && (DIR == #UP || DIR == #NA) && l4_u; }
+    edge { LC -> L4 where f == 4 && (DIR == #DOWN || DIR == #NA) && l4_d; }
+    edge { LC -> L5 where f == 5 && (DIR == #UP || DIR == #NA) && l5_u; }
+    edge { LC -> L5 where f == 5 && (DIR == #DOWN || DIR == #NA) && l5_d; }
+    edge { LC -> L6 where f == 6 && (DIR == #UP || DIR == #NA) && l6_u; }
+    edge { LC -> L6 where f == 6 && (DIR == #DOWN || DIR == #NA) && l6_d; }
+    edge { LC -> L7 where f == 7 && (DIR == #UP || DIR == #NA) && l7_u; }
+    edge { LC -> L7 where f == 7 && (DIR == #DOWN || DIR == #NA) && l7_d; }
+    edge { LC -> L8 where f == 8 && (DIR == #UP || DIR == #NA) && l8_u; }
+    edge { LC -> L8 where f == 8 && (DIR == #DOWN || DIR == #NA) && l8_d; }
+    edge { LC -> L9 where f == 9 && (DIR == #UP || DIR == #NA) && l9_u; }
+    edge { LC -> L9 where f == 9 && (DIR == #DOWN || DIR == #NA) && l9_d; }
+    edge { LC -> L10 where f == 10 && (DIR == #UP || DIR == #NA) && l10_u; }
+    edge { LC -> L10 where f == 10 && (DIR == #DOWN || DIR == #NA) && l10_d; }
+    edge { LC -> L11 where f == 11 && (DIR == #UP || DIR == #NA) && l11_u; }
+    edge { LC -> L11 where f == 11 && (DIR == #DOWN || DIR == #NA) && l11_d; }
+    edge { LC -> L12 where f == 12 && (DIR == #UP || DIR == #NA) && l12_u; }
+    edge { LC -> L12 where f == 12 && (DIR == #DOWN || DIR == #NA) && l12_d; }
+    edge { LC -> L13 where f == 13 && (DIR == #UP || DIR == #NA) && l13_u; }
+    edge { LC -> L13 where f == 13 && (DIR == #DOWN || DIR == #NA) && l13_d; }
+    edge { LC -> L14 where f == 14 && (DIR == #UP || DIR == #NA) && l14_u; }
+    edge { LC -> L14 where f == 14 && (DIR == #DOWN || DIR == #NA) && l14_d; }
+    edge { LC -> L15 where f == 15 && (DIR == #UP || DIR == #NA) && l15_u; }
+    edge { LC -> L15 where f == 15 && (DIR == #DOWN || DIR == #NA) && l15_d; }
+    edge { LC -> L16 where f == 16 && (DIR == #UP || DIR == #NA) && l16_u; }
+    edge { LC -> L16 where f == 16 && (DIR == #DOWN || DIR == #NA) && l16_d; }
+    edge { LC -> L17 where f == 17 && (DIR == #UP || DIR == #NA) && l17_u; }
+    edge { LC -> L17 where f == 17 && (DIR == #DOWN || DIR == #NA) && l17_d; }
+    edge { LC -> L18 where f == 18 && (DIR == #UP || DIR == #NA) && l18_u; }
+    edge { LC -> L18 where f == 18 && (DIR == #DOWN || DIR == #NA) && l18_d; }
+    edge { LC -> L19 where f == 19 && l19_d; }
 
     edge { LC -> SetMotionUp
-        where (
-            (f == 0 && (l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 1 && (l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 2 && (l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 3 && (l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 4 && (l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 5 && (l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 6 && (l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 7 && (l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 8 && (l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 9 && (l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 10 && (l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 11 && (l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 12 && (l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 13 && (l14_u || l15_u || l16_u || l17_u || l18_u || l19_u || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 14 && (l15_u || l16_u || l17_u || l18_u || l19_u || l15_d || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 15 && (l16_u || l17_u || l18_u || l19_u || l16_d || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 16 && (l17_u || l18_u || l19_u || l17_d || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 17 && (l18_u || l19_u || l18_d || l19_d) && (DIR == #UP || DIR == #NA)) ||
-            (f == 18 && (l19_u || l19_d) && (DIR == #UP || DIR == #NA))         );
+    where (
+(f == 0 && (l1_u || l1_d  || l2_u || l2_d  || l3_u || l3_d  || l4_u || l4_d  || l5_u || l5_d  || l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 1 && (l2_u || l2_d  || l3_u || l3_d  || l4_u || l4_d  || l5_u || l5_d  || l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 2 && (l3_u || l3_d  || l4_u || l4_d  || l5_u || l5_d  || l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 3 && (l4_u || l4_d  || l5_u || l5_d  || l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 4 && (l5_u || l5_d  || l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 5 && (l6_u || l6_d  || l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 6 && (l7_u || l7_d  || l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 7 && (l8_u || l8_d  || l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 8 && (l9_u || l9_d  || l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 9 && (l10_u || l10_d  || l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 10 && (l11_u || l11_d  || l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 11 && (l12_u || l12_d  || l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 12 && (l13_u || l13_d  || l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 13 && (l14_u || l14_d  || l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 14 && (l15_u || l15_d  || l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 15 && (l16_u || l16_d  || l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 16 && (l17_u || l17_d  || l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 17 && (l18_u || l18_d  || l19_d) && (DIR == #UP || DIR == #NA)) ||
+          (f == 18 && (l19_d) && (DIR == #UP || DIR == #NA))
+    );
     }
 
     edge { LC -> SetMotionDown
-        where (
-            (f == 19 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 18 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 17 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 16 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 15 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 14 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 13 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 12 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 11 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 10 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 9 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 8 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 7 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 6 && (l0_d || l1_d || l2_d || l3_d || l4_d || l5_d || l0_u || l1_u || l2_u || l3_u || l4_u || l5_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 5 && (l0_d || l1_d || l2_d || l3_d || l4_d || l0_u || l1_u || l2_u || l3_u || l4_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 4 && (l0_d || l1_d || l2_d || l3_d || l0_u || l1_u || l2_u || l3_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 3 && (l0_d || l1_d || l2_d || l0_u || l1_u || l2_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 2 && (l0_d || l1_d || l0_u || l1_u) && (DIR == #DOWN || DIR == #NA)) ||
-            (f == 1 && (l0_d || l0_u) && (DIR == #DOWN || DIR == #NA))         );
+    where (
+(f == 19 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l14_d || l14_u || l15_d || l15_u || l16_d || l16_u || l17_d || l17_u || l18_d || l18_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 18 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l14_d || l14_u || l15_d || l15_u || l16_d || l16_u || l17_d || l17_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 17 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l14_d || l14_u || l15_d || l15_u || l16_d || l16_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 16 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l14_d || l14_u || l15_d || l15_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 15 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l14_d || l14_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 14 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l13_d || l13_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 13 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l12_d || l12_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 12 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l11_d || l11_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 11 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l10_d || l10_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 10 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l9_d || l9_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 9 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l8_d || l8_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 8 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l7_d || l7_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 7 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l6_d || l6_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 6 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l5_d || l5_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 5 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l4_d || l4_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 4 && (l1_d || l1_u || l2_d || l2_u || l3_d || l3_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 3 && (l1_d || l1_u || l2_d || l2_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 2 && (l1_d || l1_u || l0_u) && (DIR == #DOWN || DIR == #NA)) ||
+          (f == 1 && (l0_u) && (DIR == #DOWN || DIR == #NA))
+    );
+    }
+
+    edge { LC -> DoorOpen
+       where (f == 0 && c0) ||
+             (f == 1 && c1) ||
+             (f == 2 && c2) ||
+             (f == 3 && c3) ||
+             (f == 4 && c4) ||
+             (f == 5 && c5) ||
+             (f == 6 && c6) ||
+             (f == 7 && c7) ||
+             (f == 8 && c8) ||
+             (f == 9 && c9) ||
+             (f == 10 && c10) ||
+             (f == 11 && c11) ||
+             (f == 12 && c12) ||
+             (f == 13 && c13) ||
+             (f == 14 && c14) ||
+             (f == 15 && c15) ||
+             (f == 16 && c16) ||
+             (f == 17 && c17) ||
+             (f == 18 && c18) ||
+             (f == 19 && c19);
     }
 
     edge { DoorOpen -> CC }
     edge { CC -> DoorClose }
+
+    // Continue upward or change direction to upward
     edge { DoorClose -> SetMotionUp
-        where (DIR == #UP && f < FLOORS-1);
-    }
-    edge { DoorClose -> SetMotionDown
-        where (DIR == #DOWN && f > 0);
+        where (
+            ((DIR == #UP || DIR == #NA)&& 
+                (
+                    (f == 0 && (c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 1 && (c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 2 && (c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 3 && (c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 4 && (c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 5 && (c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 6 && (c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 7 && (c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 8 && (c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 9 && (c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 10 && (c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 11 && (c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 12 && (c13 || c14 || c15 || c16 || c17 || c18 || c19 || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 13 && (c14 || c15 || c16 || c17 || c18 || c19 || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 14 && (c15 || c16 || c17 || c18 || c19 || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 15 && (c16 || c17 || c18 || c19 || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 16 && (c17 || c18 || c19 || l17_u || l18_u || l19_d)) ||
+                    (f == 17 && (c18 || c19 || l18_u || l19_d)) ||
+                    (f == 18 && (c19 || l19_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA) &&
+                (
+                    (f == 0 && (c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 2 && !(c0 || l0_u || c1 || l1_d || l1_u) && (c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 3 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u) && (c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 4 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u) && (c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 5 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u) && (c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 6 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u) && (c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 7 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u) && (c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 8 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u) && (c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 9 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u) && (c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 10 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u) && (c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 11 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u) && (c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 12 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u) && (c13 || c14 || c15 || c16 || c17 || c18 || c19 || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 13 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u) && (c14 || c15 || c16 || c17 || c18 || c19 || l14_d || l15_d || l16_d || l17_d || l18_d || l19_d || l14_u || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 14 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u || c13 || l13_d || l13_u) && (c15 || c16 || c17 || c18 || c19 || l15_d || l16_d || l17_d || l18_d || l19_d || l15_u || l16_u || l17_u || l18_u)) ||
+                    (f == 15 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u || c13 || l13_d || l13_u || c14 || l14_d || l14_u) && (c16 || c17 || c18 || c19 || l16_d || l17_d || l18_d || l19_d || l16_u || l17_u || l18_u)) ||
+                    (f == 16 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u || c13 || l13_d || l13_u || c14 || l14_d || l14_u || c15 || l15_d || l15_u) && (c17 || c18 || c19 || l17_d || l18_d || l19_d || l17_u || l18_u)) ||
+                    (f == 17 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u || c13 || l13_d || l13_u || c14 || l14_d || l14_u || c15 || l15_d || l15_u || c16 || l16_d || l16_u) && (c18 || c19 || l18_d || l19_d || l18_u)) ||
+                    (f == 18 && !(c0 || l0_u || c1 || l1_d || l1_u || c2 || l2_d || l2_u || c3 || l3_d || l3_u || c4 || l4_d || l4_u || c5 || l5_d || l5_u || c6 || l6_d || l6_u || c7 || l7_d || l7_u || c8 || l8_d || l8_u || c9 || l9_d || l9_u || c10 || l10_d || l10_u || c11 || l11_d || l11_u || c12 || l12_d || l12_u || c13 || l13_d || l13_u || c14 || l14_d || l14_u || c15 || l15_d || l15_u || c16 || l16_d || l16_u || c17 || l17_d || l17_u) && (c19 || l19_d)))
+            )
+        );
     }
 
-    edge { DoorClose -> SetIdle where 
-        (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7 && !c8 && !c9 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c16 && !c17 && !c18 && !c19);
+
+    // Continue downward or change direction to downward
+    edge { DoorClose -> SetMotionDown
+        where (
+            ((DIR == #UP || DIR == #NA) && 
+                (
+                    (f == 1 && !(c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u)) ||
+                    (f == 2 && !(c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d)) ||
+                    (f == 3 && !(c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d)) ||
+                    (f == 4 && !(c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d)) ||
+                    (f == 5 && !(c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d)) ||
+                    (f == 6 && !(c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d)) ||
+                    (f == 7 && !(c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d)) ||
+                    (f == 8 && !(c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d)) ||
+                    (f == 9 && !(c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d)) ||
+                    (f == 10 && !(c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d)) ||
+                    (f == 11 && !(c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d)) ||
+                    (f == 12 && !(c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d)) ||
+                    (f == 13 && !(c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d)) ||
+                    (f == 14 && !(c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d)) ||
+                    (f == 15 && !(c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d)) ||
+                    (f == 16 && !(c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d)) ||
+                    (f == 17 && !(c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d)) ||
+                    (f == 18 && !(c19 || l19_d) && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d)) ||
+                    (f == 19 && (c0 || l0_u || c1 || l1_u || l1_d || c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA)&&
+                (
+                    (f == 19 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l0_u)) ||
+                    (f == 18 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l0_u)) ||
+                    (f == 17 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l0_u)) ||
+                    (f == 16 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l0_u)) ||
+                    (f == 15 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l0_u)) ||
+                    (f == 14 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l0_u)) ||
+                    (f == 13 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l0_u)) ||
+                    (f == 12 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l0_u)) ||
+                    (f == 11 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l0_u)) ||
+                    (f == 10 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l0_u)) ||
+                    (f == 9 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l0_u)) ||
+                    (f == 8 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l0_u)) ||
+                    (f == 7 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l0_u)) ||
+                    (f == 6 && (c0 || c1 || c2 || c3 || c4 || c5 || l1_d || l2_d || l3_d || l4_d || l5_d || l0_u)) ||
+                    (f == 5 && (c0 || c1 || c2 || c3 || c4 || l1_d || l2_d || l3_d || l4_d || l0_u)) ||
+                    (f == 4 && (c0 || c1 || c2 || c3 || l1_d || l2_d || l3_d || l0_u)) ||
+                    (f == 3 && (c0 || c1 || c2 || l1_d || l2_d || l0_u)) ||
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
+            )
+        );
     }
+
+
+
+    edge { DoorClose -> SetIdle where 
+        (!c0 && !c1 && !c2 && !c3 && !c4 && !c5 && !c6 && !c7 && !c8 && !c9 && !c10 && !c11 && !c12 && !c13 && !c14 && !c15 && !c16 && !c17 && !c18 && !c19) || 
+        (f == 0 && c0) || 
+        (f == 1 && c1) || 
+        (f == 2 && c2) || 
+        (f == 3 && c3) || 
+        (f == 4 && c4) || 
+        (f == 5 && c5) || 
+        (f == 6 && c6) || 
+        (f == 7 && c7) || 
+        (f == 8 && c8) || 
+        (f == 9 && c9) || 
+        (f == 10 && c10) || 
+        (f == 11 && c11) || 
+        (f == 12 && c12) || 
+        (f == 13 && c13) || 
+        (f == 14 && c14) || 
+        (f == 15 && c15) || 
+        (f == 16 && c16) || 
+        (f == 17 && c17) || 
+        (f == 18 && c18) || 
+        (f == 19 && c19);
+    }
+    edge { SetIdle -> L0 where f == 0 && (c0 || l0_u); }
+    edge { SetIdle -> L1 where f == 1 && (c1 || (l1_u || l1_d)); }
+    edge { SetIdle -> L2 where f == 2 && (c2 || (l2_u || l2_d)); }
+    edge { SetIdle -> L3 where f == 3 && (c3 || (l3_u || l3_d)); }
+    edge { SetIdle -> L4 where f == 4 && (c4 || (l4_u || l4_d)); }
+    edge { SetIdle -> L5 where f == 5 && (c5 || (l5_u || l5_d)); }
+    edge { SetIdle -> L6 where f == 6 && (c6 || (l6_u || l6_d)); }
+    edge { SetIdle -> L7 where f == 7 && (c7 || (l7_u || l7_d)); }
+    edge { SetIdle -> L8 where f == 8 && (c8 || (l8_u || l8_d)); }
+    edge { SetIdle -> L9 where f == 9 && (c9 || (l9_u || l9_d)); }
+    edge { SetIdle -> L10 where f == 10 && (c10 || (l10_u || l10_d)); }
+    edge { SetIdle -> L11 where f == 11 && (c11 || (l11_u || l11_d)); }
+    edge { SetIdle -> L12 where f == 12 && (c12 || (l12_u || l12_d)); }
+    edge { SetIdle -> L13 where f == 13 && (c13 || (l13_u || l13_d)); }
+    edge { SetIdle -> L14 where f == 14 && (c14 || (l14_u || l14_d)); }
+    edge { SetIdle -> L15 where f == 15 && (c15 || (l15_u || l15_d)); }
+    edge { SetIdle -> L16 where f == 16 && (c16 || (l16_u || l16_d)); }
+    edge { SetIdle -> L17 where f == 17 && (c17 || (l17_u || l17_d)); }
+    edge { SetIdle -> L18 where f == 18 && (c18 || (l18_u || l18_d)); }
+    edge { SetIdle -> L19 where f == 19 && (c19 || l19_d); }
+
+    edge { SetIdle -> SetMotionUp
+     where (
+            ((DIR == #UP || DIR == #NA)&& 
+                (
+                    (f == 0 && (c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l1_u || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 1 && (c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l2_u || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 2 && (c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l3_u || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 3 && (c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l4_u || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 4 && (c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l5_u || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 5 && (c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l6_u || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 6 && (c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l7_u || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 7 && (c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l8_u || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 8 && (c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l9_u || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 9 && (c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l10_u || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 10 && (c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l11_u || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 11 && (c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l12_u || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 12 && (c13 || c14 || c15 || c16 || c17 || c18 || c19 || l13_u || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 13 && (c14 || c15 || c16 || c17 || c18 || c19 || l14_u || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 14 && (c15 || c16 || c17 || c18 || c19 || l15_u || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 15 && (c16 || c17 || c18 || c19 || l16_u || l17_u || l18_u || l19_d)) ||
+                    (f == 16 && (c17 || c18 || c19 || l17_u || l18_u || l19_d)) ||
+                    (f == 17 && (c18 || c19 || l18_u || l19_d)) ||
+                    (f == 18 && (c19 || l19_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA) &&
+                (
+                    (f == 0 && (c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 1 && !(c0 || l0_u) && (c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 2 && !(c0 || c1 || l0_u || l1_u || l1_d) && (c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 3 && !(c0 || c1 || c2 || l0_u || l1_u || l1_d || l2_u || l2_d) && (c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 4 && !(c0 || c1 || c2 || c3 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d) && (c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 5 && !(c0 || c1 || c2 || c3 || c4 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d) && (c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 6 && !(c0 || c1 || c2 || c3 || c4 || c5 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d) && (c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 7 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d) && (c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 8 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d) && (c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 9 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d) && (c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 10 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d) && (c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 11 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d) && (c12 || c13 || c14 || c15 || c16 || c17 || c18 || c19 || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 12 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d) && (c13 || c14 || c15 || c16 || c17 || c18 || c19 || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 13 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d) && (c14 || c15 || c16 || c17 || c18 || c19 || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 14 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d) && (c15 || c16 || c17 || c18 || c19 || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 15 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d) && (c16 || c17 || c18 || c19 || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 16 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d) && (c17 || c18 || c19 || l17_u || l17_d || l18_u || l18_d || l19_d)) ||
+                    (f == 17 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d) && (c18 || c19 || l18_u || l18_d || l19_d)) ||
+                    (f == 18 && !(c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d) && (c19 || l19_d)))
+            )
+        );
+    }
+
+    edge { SetIdle -> SetMotionDown
+  where (
+            ((DIR == #UP || DIR == #NA) && 
+                (
+                    (f == 1 && !(c2 || l2_u || l2_d || c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || l0_u)) ||
+                    (f == 2 && !(c3 || l3_u || l3_d || c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || l0_u || l1_u || l1_d)) ||
+                    (f == 3 && !(c4 || l4_u || l4_d || c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || l0_u || l1_u || l1_d || l2_u || l2_d)) ||
+                    (f == 4 && !(c5 || l5_u || l5_d || c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d)) ||
+                    (f == 5 && !(c6 || l6_u || l6_d || c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d)) ||
+                    (f == 6 && !(c7 || l7_u || l7_d || c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d)) ||
+                    (f == 7 && !(c8 || l8_u || l8_d || c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d)) ||
+                    (f == 8 && !(c9 || l9_u || l9_d || c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d)) ||
+                    (f == 9 && !(c10 || l10_u || l10_d || c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d)) ||
+                    (f == 10 && !(c11 || l11_u || l11_d || c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d)) ||
+                    (f == 11 && !(c12 || l12_u || l12_d || c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d)) ||
+                    (f == 12 && !(c13 || l13_u || l13_d || c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d)) ||
+                    (f == 13 && !(c14 || l14_u || l14_d || c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d)) ||
+                    (f == 14 && !(c15 || l15_u || l15_d || c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d)) ||
+                    (f == 15 && !(c16 || l16_u || l16_d || c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d)) ||
+                    (f == 16 && !(c17 || l17_u || l17_d || c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d)) ||
+                    (f == 17 && !(c18 || l18_u || l18_d || c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d)) ||
+                    (f == 18 && !(c19 || l19_d) && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d)) ||
+                    (f == 19 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || l0_u || l1_u || l1_d || l2_u || l2_d || l3_u || l3_d || l4_u || l4_d || l5_u || l5_d || l6_u || l6_d || l7_u || l7_d || l8_u || l8_d || l9_u || l9_d || l10_u || l10_d || l11_u || l11_d || l12_u || l12_d || l13_u || l13_d || l14_u || l14_d || l15_u || l15_d || l16_u || l16_d || l17_u || l17_d || l18_u || l18_d)))
+            ) ||
+            ((DIR == #DOWN || DIR ==#NA)&&
+                (
+                    (f == 19 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || c18 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l18_d || l0_u)) ||
+                    (f == 18 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || c17 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l17_d || l0_u)) ||
+                    (f == 17 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || c16 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l16_d || l0_u)) ||
+                    (f == 16 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || c15 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l15_d || l0_u)) ||
+                    (f == 15 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || c14 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l14_d || l0_u)) ||
+                    (f == 14 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || c13 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l13_d || l0_u)) ||
+                    (f == 13 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || c12 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l12_d || l0_u)) ||
+                    (f == 12 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || c11 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l11_d || l0_u)) ||
+                    (f == 11 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || c10 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l10_d || l0_u)) ||
+                    (f == 10 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || c9 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l9_d || l0_u)) ||
+                    (f == 9 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || c8 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l8_d || l0_u)) ||
+                    (f == 8 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || c7 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l7_d || l0_u)) ||
+                    (f == 7 && (c0 || c1 || c2 || c3 || c4 || c5 || c6 || l1_d || l2_d || l3_d || l4_d || l5_d || l6_d || l0_u)) ||
+                    (f == 6 && (c0 || c1 || c2 || c3 || c4 || c5 || l1_d || l2_d || l3_d || l4_d || l5_d || l0_u)) ||
+                    (f == 5 && (c0 || c1 || c2 || c3 || c4 || l1_d || l2_d || l3_d || l4_d || l0_u)) ||
+                    (f == 4 && (c0 || c1 || c2 || c3 || l1_d || l2_d || l3_d || l0_u)) ||
+                    (f == 3 && (c0 || c1 || c2 || l1_d || l2_d || l0_u)) ||
+                    (f == 2 && (c0 || c1 || l1_d || l0_u)) ||
+                    (f == 1 && (c0 || l0_u)))
+            )
+        );
+    }
+
     edge { SetMotionUp -> MoveUp }
-    edge { SetMotionDown -> MoveDown }
     edge { MoveUp -> MoveUp }
+    edge { MoveUp -> L1 where f == 1 && ((l1_u && DIR == #UP) || c1 ); }
+    edge { MoveUp -> L2 where f == 2 && ((l2_u && DIR == #UP) || c2 ); }
+    edge { MoveUp -> L3 where f == 3 && ((l3_u && DIR == #UP) || c3 ); }
+    edge { MoveUp -> L4 where f == 4 && ((l4_u && DIR == #UP) || c4 ); }
+    edge { MoveUp -> L5 where f == 5 && ((l5_u && DIR == #UP) || c5 ); }
+    edge { MoveUp -> L6 where f == 6 && ((l6_u && DIR == #UP) || c6 ); }
+    edge { MoveUp -> L7 where f == 7 && ((l7_u && DIR == #UP) || c7 ); }
+    edge { MoveUp -> L8 where f == 8 && ((l8_u && DIR == #UP) || c8 ); }
+    edge { MoveUp -> L9 where f == 9 && ((l9_u && DIR == #UP) || c9 ); }
+    edge { MoveUp -> L10 where f == 10 && ((l10_u && DIR == #UP) || c10 ); }
+    edge { MoveUp -> L11 where f == 11 && ((l11_u && DIR == #UP) || c11 ); }
+    edge { MoveUp -> L12 where f == 12 && ((l12_u && DIR == #UP) || c12 ); }
+    edge { MoveUp -> L13 where f == 13 && ((l13_u && DIR == #UP) || c13 ); }
+    edge { MoveUp -> L14 where f == 14 && ((l14_u && DIR == #UP) || c14 ); }
+    edge { MoveUp -> L15 where f == 15 && ((l15_u && DIR == #UP) || c15 ); }
+    edge { MoveUp -> L16 where f == 16 && ((l16_u && DIR == #UP) || c16 ); }
+    edge { MoveUp -> L17 where f == 17 && ((l17_u && DIR == #UP) || c17 ); }
+    edge { MoveUp -> L18 where f == 18 && ((l18_u && DIR == #UP) || c18 ); }
+    edge { MoveUp -> L19 where f == 19 && ((l19_d && DIR == #UP) || c19 ); }
+
+    edge { SetMotionDown -> MoveDown }
     edge { MoveDown -> MoveDown }
-    edge { MoveDown -> L0 where f == 0 && (c0 || l0_u); }
-    edge { MoveUp -> L1 where f == 1 && (c1 || l1_d); }
-    edge { MoveDown -> L1 where f == 1 && (c1 || l1_u); }
-    edge { MoveUp -> L2 where f == 2 && (c2 || l2_d); }
-    edge { MoveDown -> L2 where f == 2 && (c2 || l2_u); }
-    edge { MoveUp -> L3 where f == 3 && (c3 || l3_d); }
-    edge { MoveDown -> L3 where f == 3 && (c3 || l3_u); }
-    edge { MoveUp -> L4 where f == 4 && (c4 || l4_d); }
-    edge { MoveDown -> L4 where f == 4 && (c4 || l4_u); }
-    edge { MoveUp -> L5 where f == 5 && (c5 || l5_d); }
-    edge { MoveDown -> L5 where f == 5 && (c5 || l5_u); }
-    edge { MoveUp -> L6 where f == 6 && (c6 || l6_d); }
-    edge { MoveDown -> L6 where f == 6 && (c6 || l6_u); }
-    edge { MoveUp -> L7 where f == 7 && (c7 || l7_d); }
-    edge { MoveDown -> L7 where f == 7 && (c7 || l7_u); }
-    edge { MoveUp -> L8 where f == 8 && (c8 || l8_d); }
-    edge { MoveDown -> L8 where f == 8 && (c8 || l8_u); }
-    edge { MoveUp -> L9 where f == 9 && (c9 || l9_d); }
-    edge { MoveDown -> L9 where f == 9 && (c9 || l9_u); }
-    edge { MoveUp -> L10 where f == 10 && (c10 || l10_d); }
-    edge { MoveDown -> L10 where f == 10 && (c10 || l10_u); }
-    edge { MoveUp -> L11 where f == 11 && (c11 || l11_d); }
-    edge { MoveDown -> L11 where f == 11 && (c11 || l11_u); }
-    edge { MoveUp -> L12 where f == 12 && (c12 || l12_d); }
-    edge { MoveDown -> L12 where f == 12 && (c12 || l12_u); }
-    edge { MoveUp -> L13 where f == 13 && (c13 || l13_d); }
-    edge { MoveDown -> L13 where f == 13 && (c13 || l13_u); }
-    edge { MoveUp -> L14 where f == 14 && (c14 || l14_d); }
-    edge { MoveDown -> L14 where f == 14 && (c14 || l14_u); }
-    edge { MoveUp -> L15 where f == 15 && (c15 || l15_d); }
-    edge { MoveDown -> L15 where f == 15 && (c15 || l15_u); }
-    edge { MoveUp -> L16 where f == 16 && (c16 || l16_d); }
-    edge { MoveDown -> L16 where f == 16 && (c16 || l16_u); }
-    edge { MoveUp -> L17 where f == 17 && (c17 || l17_d); }
-    edge { MoveDown -> L17 where f == 17 && (c17 || l17_u); }
-    edge { MoveUp -> L18 where f == 18 && (c18 || l18_d); }
-    edge { MoveDown -> L18 where f == 18 && (c18 || l18_u); }
-    edge { MoveUp -> L19 where f == 19 && (c19 || l19_d); }
+    edge { MoveDown -> L18 where f == 18 && (l18_d && DIR == #DOWN) || c18; }
+    edge { MoveDown -> L17 where f == 17 && (l17_d && DIR == #DOWN) || c17; }
+    edge { MoveDown -> L16 where f == 16 && (l16_d && DIR == #DOWN) || c16; }
+    edge { MoveDown -> L15 where f == 15 && (l15_d && DIR == #DOWN) || c15; }
+    edge { MoveDown -> L14 where f == 14 && (l14_d && DIR == #DOWN) || c14; }
+    edge { MoveDown -> L13 where f == 13 && (l13_d && DIR == #DOWN) || c13; }
+    edge { MoveDown -> L12 where f == 12 && (l12_d && DIR == #DOWN) || c12; }
+    edge { MoveDown -> L11 where f == 11 && (l11_d && DIR == #DOWN) || c11; }
+    edge { MoveDown -> L10 where f == 10 && (l10_d && DIR == #DOWN) || c10; }
+    edge { MoveDown -> L9 where f == 9 && (l9_d && DIR == #DOWN) || c9; }
+    edge { MoveDown -> L8 where f == 8 && (l8_d && DIR == #DOWN) || c8; }
+    edge { MoveDown -> L7 where f == 7 && (l7_d && DIR == #DOWN) || c7; }
+    edge { MoveDown -> L6 where f == 6 && (l6_d && DIR == #DOWN) || c6; }
+    edge { MoveDown -> L5 where f == 5 && (l5_d && DIR == #DOWN) || c5; }
+    edge { MoveDown -> L4 where f == 4 && (l4_d && DIR == #DOWN) || c4; }
+    edge { MoveDown -> L3 where f == 3 && (l3_d && DIR == #DOWN) || c3; }
+    edge { MoveDown -> L2 where f == 2 && (l2_d && DIR == #DOWN) || c2; }
+    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
+    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
     edge { L0 -> DoorOpen }
     edge { L1 -> DoorOpen }
     edge { L2 -> DoorOpen }
@@ -308,7 +606,7 @@ graph Elevator{
     edge { L17 -> DoorOpen }
     edge { L18 -> DoorOpen }
     edge { L19 -> DoorOpen }
-
+    
     goal{
         assert (initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==10
             && !initial(l0_u) && initial(l1_u) && !initial(l1_d) && initial(l2_d) && !initial(l2_u) 
