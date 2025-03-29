@@ -99,8 +99,8 @@ This will output the Cyclone model code (in `.cyc` syntax) directly to the termi
 If you use this project in your research, please cite:
 
 > Huan Zhang, Li Yi, Long Cheng, Hao Wu.  
-> "Formal Verification of Elevator Logic for Safety and Efficiency."  
-> *Proceedings of the International Conference on Formal Methods in Computer-Aided Design (FMCAD), 2025.*
+> "A Case Study on Verifying Elevator Scheduling Control System in Siemens S7-200 PLC."  
+> *Submitted to the 30th International Conference on Formal Methods for Industrial Critical Systems (FMICS), 2025.*
 
 ---
 
