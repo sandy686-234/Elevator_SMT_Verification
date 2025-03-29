@@ -6,21 +6,21 @@ graph Elevator{{
 
     //landing call buttons
 """
-    # 生成楼层按钮（上下行）
+     # Generate floor buttons (up/down)
     for i in range(n):
         if i == 0:
-            code += f"    bool l{i}_u;\n"  # 第一层只有上行按钮
+            code += f"    bool l{i}_u;\n"   # First floor: only up button
         elif i == n - 1:
-            code += f"    bool l{i}_d;\n"  # 最高层只有下行按钮
+            code += f"    bool l{i}_d;\n"  # Top floor: only down button
         else:
             code += f"    bool l{i}_u, l{i}_d;\n"
 
-    # 生成车内楼层按钮
+   # Generate car call buttons
     code += "\n    //car call buttons\n"
     for i in range(n):
         code += f"    bool c{i};\n"
 
-    # 电梯状态和基础节点
+    # Elevator state and basic nodes
     code += """
     enum {UP,DOWN,NA} DIR;
     int f where f >= 0 && f <= FLOORS - 1; //current floor
@@ -37,15 +37,15 @@ graph Elevator{{
     final normal node SetMotionDown{DIR=#DOWN;}
     final normal node SetIdle{DIR=#NA;}
 
-    // 初始化楼层状态
+    // Initialize floor state
 """
-    # 生成每一层的初始化状态
+    # Initialize each floor state
     for i in range(n):
         code += f"    final normal node L{i} {{\n"
         code += f"        c{i} = false;\n"
-        if i == 0:  # 第一层
+        if i == 0:  
             code += f"        l{i}_u = false;\n"
-        elif i == n - 1:  # 最高层
+        elif i == n - 1:  
             code += f"        l{i}_d = false;\n"
         else:
             code += f"        l{i}_u = false;\n        l{i}_d = false;\n"
@@ -53,57 +53,57 @@ graph Elevator{{
 
     code += "\n    final normal node DoorClose{}\n"
 
-    # LC -> DoorOpen 逻辑（处理特殊楼层）
+    # LC -> DoorOpen (handle special floors)
     code += "    edge { LC -> DoorOpen \n    where "
     edge_conditions = []
     for i in range(n):
         if i == 0:
-            edge_conditions.append(f"(f == {i} && l{i}_u)")  # 第一层只能上行
+            edge_conditions.append(f"(f == {i} && l{i}_u)")  
         elif i == n - 1:
-            edge_conditions.append(f"(f == {i} && l{i}_d)")  # 最高层只能下行
+            edge_conditions.append(f"(f == {i} && l{i}_d)")  
         else:
             edge_conditions.append(f"(f == {i} && (l{i}_u || l{i}_d))")
     code += " ||\n           ".join(edge_conditions) + ";\n    }\n"
 
-    # LC -> 特定楼层的边缘条件
+    # LC -> specific floor edge conditions
     for i in range(n):
         if i == 0:
             code += f"    edge {{ LC -> L{i} where f == {i} && l{i}_u; }}\n"
         elif i == n - 1:
             code += f"    edge {{ LC -> L{i} where f == {i} && l{i}_d; }}\n"
         else:
-            # 上行和下行分别处理
+           
             code += f"    edge {{ LC -> L{i} where f == {i} && (DIR == #UP || DIR == #NA) && l{i}_u; }}\n"
             code += f"    edge {{ LC -> L{i} where f == {i} && (DIR == #DOWN || DIR == #NA) && l{i}_d; }}\n"
 
-    # 修改 SetMotionUp 逻辑，去掉最高层的上行条件
+    
     code += f"""
     edge {{ LC -> SetMotionUp
     where (
 """
     up_conditions = []
     for i in range(n - 1):
-        up_floor_conditions = [f"l{j}_u || l{j}_d " for j in range(i + 1, n - 1)]  # 排除最高层
+        up_floor_conditions = [f"l{j}_u || l{j}_d " for j in range(i + 1, n - 1)]  
         up_floor_conditions += [f"l{n-1}_d"]
         if up_floor_conditions:
             up_conditions.append(f"(f == {i} && ({' || '.join(up_floor_conditions)}) && (DIR == #UP || DIR == #NA))")
     code += " ||\n          ".join(up_conditions) + "\n    );\n    }\n"
 
-    # 修改 SetMotionDown 逻辑，去掉最低层的下行条件
+    
     code += f"""
     edge {{ LC -> SetMotionDown
     where (
 """
     down_conditions = []
     for i in range(n - 1, 0, -1):
-        down_floor_conditions = [f"l{j}_d || l{j}_u" for j in range(1, i)]  # 排除最低层
+        down_floor_conditions = [f"l{j}_d || l{j}_u" for j in range(1, i)]  
         down_floor_conditions += [f"l0_u"]
         if down_floor_conditions:
             down_conditions.append(
                 f"(f == {i} && ({' || '.join(down_floor_conditions)}) && (DIR == #DOWN || DIR == #NA))")
     code += " ||\n          ".join(down_conditions) + "\n    );\n    }\n"
 
-    # 车厢呼叫的开门逻辑
+    # Logic for door opening on car call
     code += """
     edge { LC -> DoorOpen
        where """
@@ -112,7 +112,7 @@ graph Elevator{{
         car_call_conditions.append(f"(f == {i} && c{i})")
     code += " ||\n             ".join(car_call_conditions) + ";\n    }\n"
 
-    # 后续部分保持不变（从门的开关和状态转换逻辑开始）
+    
     code += """
     edge { DoorOpen -> CC }
     edge { CC -> DoorClose }
@@ -126,7 +126,7 @@ graph Elevator{{
     up_floor_conditions = []
     for i in range(n - 1):
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
-        # 最高层不添加上行条件
+    
         landing_conditions = [f"l{j}_u" if j != n-1 else '' for j in range(i + 1, n - 1)]
         landing_conditions += [f"l{n-1}_d"]
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
@@ -140,31 +140,31 @@ graph Elevator{{
 """""
     down_floor_conditions = []
     for i in range(n - 1):
-        # 添加否定逻辑：当前楼层以下没有请求才考虑向上
+      
         negative_conditions = []
         for j in range(i):
             negative_conditions.append(f"c{j}")
-            if j > 0:  # 最低楼层没有下行请求
+            if j > 0: 
                 negative_conditions.append(f"l{j}_d")
-            if j < n-1:  # 最高楼层没有上行请求
+            if j < n-1: 
                 negative_conditions.append(f"l{j}_u")
 
-        # 当前楼层以上的请求
+   
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
         landing_conditions = [f"l{j}_d" for j in range(i + 1, n)]
-        if i + 1 < n - 1:  # 非最高楼层前一层可以有上行请求
+        if i + 1 < n - 1:  
             landing_conditions += [f"l{j}_u" for j in range(i + 1, n - 1)]
 
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
 
-        # 组合否定逻辑和正向条件
+      
         if negative_conditions and conditions:
-            # 只有当没有较低楼层请求时，才考虑响应较高楼层请求
+            
             down_floor_conditions.append(
                 f"(f == {i} && !({' || '.join(negative_conditions)}) && ({' || '.join(conditions)}))"
             )
         elif conditions:
-            # 0层没有较低楼层，不需要否定逻辑
+        
             down_floor_conditions.append(f"(f == {i} && ({' || '.join(conditions)}))")
 
     code += "                    " + " ||\n                    ".join(down_floor_conditions)
@@ -220,7 +220,7 @@ graph Elevator{{
     down_conditions = []
     for i in range(n - 1, 0, -1):
         car_conditions = [f"c{j}" for j in range(0, i)]
-        # 最低层不添加上行条件
+   
         landing_conditions = [f"l{j}_d" if j != 0 else '' for j in range(1, i)]
         landing_conditions += [f"l{0}_u"]
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
@@ -245,7 +245,7 @@ graph Elevator{{
 
     code = code.rstrip(" || \n") + ";\n    }\n"
 
-    # SetIdle 到特定楼层的转换
+
     for i in range(n):
         if i == 0:
             code += f"    edge {{ SetIdle -> L{i} where f == {i} && (c{i} || l{i}_u); }}\n"
@@ -264,7 +264,7 @@ graph Elevator{{
     up_floor_conditions = []
     for i in range(n - 1):
         car_conditions = [f"c{j}" for j in range(i + 1, n)]
-        # 最高层不添加上行条件
+     
         landing_conditions = [f"l{j}_u" if j != n-1 else '' for j in range(i + 1, n - 1)]
         landing_conditions += [f"l{n-1}_d"]
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
@@ -296,7 +296,7 @@ graph Elevator{{
                     f"(f == {i} && ({' || '.join( conditions )}))"
                 )
         else:
-            # 构造下方请求的否定
+        
             lower_conditions = [f"c{j}" for j in range( 0, i )]
             for j in range( 0, i ):
                 if j == 0:
@@ -315,7 +315,6 @@ graph Elevator{{
         );
     }
 
-    // 修改 SetIdle -> SetMotionDown 的逻辑
     edge { SetIdle -> SetMotionDown
   where (
             ((DIR == #UP || DIR == #NA) && 
@@ -324,7 +323,7 @@ graph Elevator{{
     up_down_conditions = []
     for i in range(1, n):
         car_conditions_lower = [f"c{j}" for j in range(0, i)]
-        # 最低层不添加下行条件
+       
         landing_conditions_lower = []
         for j in range( 0, i ):
             if j == 0:
@@ -334,7 +333,7 @@ graph Elevator{{
                 landing_conditions_lower.append( f"l{j}_d" )
         down_expr = f"({' || '.join( car_conditions_lower + landing_conditions_lower )})"
 
-        # 否定的高层请求（f > 0 且不是最高层时）
+      
         not_expr = ""
         if i < n - 1:
             upper_conditions = []
@@ -357,7 +356,7 @@ graph Elevator{{
     down_conditions = []
     for i in range(n - 1, 0, -1):
         car_conditions = [f"c{j}" for j in range(0, i)]
-        # 最低层不添加上行条件
+   
         landing_conditions = [f"l{j}_d" if j != 0 else '' for j in range(1, i)]
         landing_conditions += [f"l{0}_u"]
         conditions = [cond for cond in car_conditions + landing_conditions if cond]
@@ -370,13 +369,13 @@ graph Elevator{{
     }
 """
 
-    # 上下运动节点转换
+
     code += """
     edge { SetMotionUp -> MoveUp }
     edge { MoveUp -> MoveUp }
 """
     for i in range(1, n-1):
-        # 最高层不能继续上行，且不使用最高层的上行按钮
+   
         code += f"    edge {{ MoveUp -> L{i} where f == {i} && ((l{i}_u && DIR == #UP) || c{i} ); }}\n"
     code += f"    edge {{ MoveUp -> L{n-1} where f == {n-1} && ((l{n-1}_d && DIR == #UP) || c{n-1} ); }}\n"
     code += """
@@ -384,15 +383,15 @@ graph Elevator{{
     edge { MoveDown -> MoveDown }
 """
     for i in range(n-2, 0, -1):
-        # 最低层不能继续下行，且不使用最低层的下行按钮
+      
         code += f"    edge {{ MoveDown -> L{i} where f == {i} && (l{i}_d && DIR == #DOWN) || c{i}; }}\n"
     code += f"    edge {{ MoveDown -> L{0} where f == {0} && (l{0}_u && DIR == #DOWN ||  c{0} ); }}\n"
 
-    # 各楼层开门
+    
     for i in range(n):
         code += f"    edge {{ L{i} -> DoorOpen }}\n"
 
-    # 目标和验证条件
+ 
     code += f"""
     goal{{
         assert ( initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && initial(f)==3
