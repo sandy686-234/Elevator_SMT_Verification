@@ -392,7 +392,7 @@ graph Elevator{{
 """
     return code
 
-def save_cyclone_file(code, filename="output.cyclone"):
+def save_cyclone_file(code, filename="output_n.cyclone"):
     with open(filename, 'w') as file:
         file.write(code)
 
