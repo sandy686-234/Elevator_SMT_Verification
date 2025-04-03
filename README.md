@@ -18,7 +18,7 @@ This repro contains all of our experiment results from the paper. All SMT formul
 ```
 .
 ├── docs/                   # state diagram and formulas in pdf
-├── examples/               # Predefined FSM and Cyclone models
+├── examples/               # Predefined FSM examples (3- and 4-floor elevators) with corresponding trace diagrams.
 ├── test/                   # generated Cyclone specification and image-based traces
 ├── auto_fsm_generator.py   # python program for generating n-floor specification.
 ```
