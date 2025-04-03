@@ -8,8 +8,8 @@ This repro contains all of our experiment results from the paper. All SMT formul
 
 ## Features
 - [A full state diagram for scheduling control logic in S7-200 PLC](https://github.com/sandy686-234/Elevator_SMT_Verification/blob/main/docs/state_diagram.png)
-- A complete set of formulas for scheduling control logic in S7-200 PLC.
-- A python program that automatically generate specification for n-floor scheduling control logic. 
+- [A complete set of formulas for scheduling control logic in S7-200 PLC](https://github.com/sandy686-234/Elevator_SMT_Verification/blob/main/docs/SMT%20Formulas%20for%20State%20Transitions.pdf).
+- [A python program that automatically generate specification for n-floor scheduling control logic](https://github.com/sandy686-234/Elevator_SMT_Verification/blob/main/auto_fsm_generator.py). 
 - A fully automatic tool Cyclone generates SMT formulas for verification. Tutorial about how to use Cyclone, please visit [here](https://classicwuhao.github.io/cyclone_tutorial/tutorial-content.html).
 ---
 
