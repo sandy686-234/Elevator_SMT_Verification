@@ -327,15 +327,15 @@ graph Elevator{
 
     edge { SetMotionDown -> MoveDown }
     edge { MoveDown -> MoveDown }
-    edge { MoveDown -> L8 where f == 8 && (l8_d && DIR == #DOWN) || c8; }
-    edge { MoveDown -> L7 where f == 7 && (l7_d && DIR == #DOWN) || c7; }
-    edge { MoveDown -> L6 where f == 6 && (l6_d && DIR == #DOWN) || c6; }
-    edge { MoveDown -> L5 where f == 5 && (l5_d && DIR == #DOWN) || c5; }
-    edge { MoveDown -> L4 where f == 4 && (l4_d && DIR == #DOWN) || c4; }
-    edge { MoveDown -> L3 where f == 3 && (l3_d && DIR == #DOWN) || c3; }
-    edge { MoveDown -> L2 where f == 2 && (l2_d && DIR == #DOWN) || c2; }
-    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
-    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
+    edge { MoveDown -> L8 where f == 8 && ((l8_d && DIR == #DOWN) || c8); }
+    edge { MoveDown -> L7 where f == 7 && ((l7_d && DIR == #DOWN) || c7); }
+    edge { MoveDown -> L6 where f == 6 && ((l6_d && DIR == #DOWN) || c6); }
+    edge { MoveDown -> L5 where f == 5 && ((l5_d && DIR == #DOWN) || c5); }
+    edge { MoveDown -> L4 where f == 4 && ((l4_d && DIR == #DOWN) || c4); }
+    edge { MoveDown -> L3 where f == 3 && ((l3_d && DIR == #DOWN) || c3); }
+    edge { MoveDown -> L2 where f == 2 && ((l2_d && DIR == #DOWN) || c2); }
+    edge { MoveDown -> L1 where f == 1 && ((l1_d && DIR == #DOWN) || c1); }
+    edge { MoveDown -> L0 where f == 0 && ((l0_u && DIR == #DOWN) || c0); }
     edge { L0 -> DoorOpen }
     edge { L1 -> DoorOpen }
     edge { L2 -> DoorOpen }

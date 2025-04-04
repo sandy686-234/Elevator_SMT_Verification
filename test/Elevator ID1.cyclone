@@ -176,15 +176,15 @@ graph Elevator{
 
     edge { SetMotionUp -> MoveUp }
     edge { MoveUp -> MoveUp }
-    edge { MoveUp -> L1 where f == 1 && ((l1_u && DIR == #UP) || c1 ); }
-    edge { MoveUp -> L2 where f == 2 && ((l2_u && DIR == #UP) || c2 ); }
-    edge { MoveUp -> L3 where f == 3 && ((l3_d && DIR == #UP) || c3 ); }
+    edge { MoveUp -> L1 where f == 1 && ((l1_u && DIR == #UP) || c1); }
+    edge { MoveUp -> L2 where f == 2 && ((l2_u && DIR == #UP) || c2); }
+    edge { MoveUp -> L3 where f == 3 && ((l3_d && DIR == #UP) || c3); }
 
     edge { SetMotionDown -> MoveDown }
     edge { MoveDown -> MoveDown }
-    edge { MoveDown -> L2 where f == 2 && (l2_d && DIR == #DOWN) || c2; }
-    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
-    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
+    edge { MoveDown -> L2 where f == 2 && ((l2_d && DIR == #DOWN) || c2); }
+    edge { MoveDown -> L1 where f == 1 && ((l1_d && DIR == #DOWN) || c1); }
+    edge { MoveDown -> L0 where f == 0 && ((l0_u && DIR == #DOWN) || c0); }
     edge { L0 -> DoorOpen }
     edge { L1 -> DoorOpen }
     edge { L2 -> DoorOpen }
