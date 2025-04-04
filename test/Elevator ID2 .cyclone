@@ -191,11 +191,13 @@ graph Elevator{
     edge { L3 -> DoorOpen }
 
     goal{
-        assert ( initial(f)==2
-                && initial(l3_d)
+        assert (
+                initial(f)==2 && !initial (c0)
+                && !initial (c1) && !initial (c2) && !initial(c3)
+                && initial (l0_u) && !initial(l1_u) && !initial(l1_d) 
+                && !initial (l2_u) && !initial(l2_d) && initial(l3_d)
                 && initial(DIR)==#DOWN
-                );
-
-         check for 17 condition (L2) reach (CC,LC,L0,L2,L3)
+            );
+         check for 15
     }
 }
