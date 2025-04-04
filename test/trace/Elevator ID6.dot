@@ -1,14 +1,14 @@
 /*
 * Dot trace for Elevator
-* [Time Stamp]:15:14:24, Mar-29-2025
-* [Location]:/Users/huan/Desktop/trace/trace/Elevator15(1).dot
+* [Time Stamp]:21:18:22, Apr-04-2025
+* [Location]:/Users/huan/Elevator_SMT_Verification/test/trace/Elevator ID6.dot
 * [States]:24
 * CC DoorClose DoorOpen L0 L1 L10 L11 L12 L13 L14 L2 L3 L4 L5 L6 L7 L8 L9 LC MoveDown MoveUp SetIdle SetMotionDown SetMotionUp 
 * [Trans]:101
 * [Start State]:LC
 * [Final State(s)]:
 *DoorOpen MoveUp MoveDown CC LC SetMotionUp SetMotionDown SetIdle L0 L1 L2 L3 L4 L5 L6 L7 L8 L9 L10 L11 L12 L13 L14 DoorClose 
-* [Trace Length]:16 
+* [Trace Length]:7 
 */
 
 
@@ -22,7 +22,7 @@ digraph G {
 
 
 
-label="Elevator \n 15:14:24, Mar-29-2025"
+label="Elevator \n 21:18:22, Apr-04-2025"
 labelloc=" b " ;
 labeljust=" c ";
 	n0 [color="black", style="rounded, filled" , fillcolor="pink" , shape="rect", label= < 
@@ -31,7 +31,7 @@ labeljust=" c ";
 			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -40,15 +40,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
 			 <tr><td align="center">f : </td><td>10</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -57,14 +57,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -72,15 +72,15 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n1 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[1] @DoorOpen</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[1] @SetMotionDown</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -89,15 +89,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
 			 <tr><td align="center">f : </td><td>10</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -106,14 +106,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -121,15 +121,15 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n2 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[2] @CC</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[2] @MoveDown</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -138,15 +138,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -155,14 +155,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -170,15 +170,15 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n3 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[3] @DoorClose</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[3] @L8</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -187,15 +187,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
+			 <tr><td align="center">c8 : </td><td>false</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -204,14 +204,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -219,15 +219,15 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n4 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[4] @SetIdle</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[4] @DoorOpen</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -236,15 +236,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
+			 <tr><td align="center">c8 : </td><td>false</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -253,14 +253,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -268,15 +268,15 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n5 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[5] @SetMotionDown</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[5] @CC</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
+			 <tr><td align="center">c10 : </td><td>false</td></tr> 
 			 <tr><td align="center">c11 : </td><td>false</td></tr> 
 			 <tr><td align="center">c12 : </td><td>false</td></tr> 
 			 <tr><td align="center">c13 : </td><td>false</td></tr> 
@@ -285,15 +285,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
+			 <tr><td align="center">c7 : </td><td>false</td></tr> 
+			 <tr><td align="center">c8 : </td><td>false</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -302,14 +302,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -317,404 +317,12 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 	n6 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[6] @MoveDown</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[6] @DoorClose</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>true</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n7 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[7] @L7</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n8 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[8] @DoorOpen</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n9 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[9] @CC</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n10 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[10] @DoorClose</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n11 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[11] @SetIdle</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n12 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[12] @SetMotionUp</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n13 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[13] @MoveUp</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>true</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n14 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[14] @L10</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
 			 <tr><td align="center">c10 : </td><td>false</td></tr> 
@@ -726,15 +334,15 @@ labeljust=" c ";
 			 <tr><td align="center">c3 : </td><td>false</td></tr> 
 			 <tr><td align="center">c4 : </td><td>false</td></tr> 
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
+			 <tr><td align="center">c6 : </td><td>false</td></tr> 
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">c8 : </td><td>false</td></tr> 
+			 <tr><td align="center">c9 : </td><td>false</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
+			 <tr><td align="center">l11_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
@@ -743,14 +351,14 @@ labeljust=" c ";
 			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
+			 <tr><td align="center">l2_d : </td><td>true</td></tr> 
 			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
+			 <tr><td align="center">l5_u : </td><td>true</td></tr> 
 			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
@@ -758,61 +366,12 @@ labeljust=" c ";
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
-		 </table> > ]
-	n15 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
- 		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[15] @DoorOpen</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
-			 <tr><td align="center">c0 : </td><td>false</td></tr> 
-			 <tr><td align="center">c1 : </td><td>false</td></tr> 
-			 <tr><td align="center">c10 : </td><td>false</td></tr> 
-			 <tr><td align="center">c11 : </td><td>false</td></tr> 
-			 <tr><td align="center">c12 : </td><td>false</td></tr> 
-			 <tr><td align="center">c13 : </td><td>false</td></tr> 
-			 <tr><td align="center">c14 : </td><td>false</td></tr> 
-			 <tr><td align="center">c2 : </td><td>false</td></tr> 
-			 <tr><td align="center">c3 : </td><td>false</td></tr> 
-			 <tr><td align="center">c4 : </td><td>false</td></tr> 
-			 <tr><td align="center">c5 : </td><td>false</td></tr> 
-			 <tr><td align="center">c6 : </td><td>true</td></tr> 
-			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>true</td></tr> 
-			 <tr><td align="center">c9 : </td><td>true</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
-			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l11_d : </td><td>true</td></tr> 
-			 <tr><td align="center">l11_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l12_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l13_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l14_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l2_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l3_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l4_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l5_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l6_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l9_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l9_u : </td><td>false</td></tr> 
 		 </table> > ]
 
 
 
 
-	n0->n1->n2->n3->n4->n5->n6->n7->n8->n9->n10->n11->n12->n13->n14->n15
+	n0->n1->n2->n3->n4->n5->n6
  } 
 
