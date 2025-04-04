@@ -17,10 +17,10 @@ This repro contains all of our experiment results from the paper. All SMT formul
 
 ```
 .
-├── docs/                   # state diagram and formulas in pdf
-├── examples/               # Predefined FSM examples (3- and 4-floor elevators) with corresponding trace diagrams.
-├── test/                   # generated Cyclone specification and image-based traces
-├── auto_fsm_generator.py   # python program for generating n-floor specification.
+├── docs/                   # The complete state diagram (n-floor) and transition formulas (in pdf)
+├── examples/               # Two examples of Cyclone specification files for 3-and 4-floor elevators with generated trace available.
+├── test/                   # Automatically generated Cyclone specification files and image-based traces (Table 3 in the paper).
+├── auto_fsm_generator.py   # A python program for generating n-floor Cyclone specification files.
 ```
 ---
 
