@@ -28,13 +28,12 @@ This repro contains all of our experiment results from the paper. All SMT formul
 ## Reproducing Results
 **Instructions**:
 - Make sure you have Java (x64 is preferred) installed.
-- Save the generated code produced from auto_fsm_generator.py into .cyclone file.
-- [Install Cyclone for VS Code Plug-in](https://github.com/classicwuhao/CycloneVSCodePlugin), just follow the instructions (very straightforward)
-- Launch VS Code, open .cyclone file.
-- Right click editor -> choose 'Cyclone' -> choose 'Check This Cyclone Spec'
-- Wait till Cyclone finishes verification
-- Select 'Show Trace File ' or 'Show Trace File (Graphic)' if you have installed 'graphviz' and make sure you tick 'Generate Graphic Trace' in Cyclone settings.
-- This will show you the trace in text or image.
+- Choose one of specification files from `test` folder, and open it with VS code.
+- [Install Cyclone for VS Code Plug-in](https://github.com/classicwuhao/CycloneVSCodePlugin), just follow the instructions (very straightforward).
+- Right click the editor -> choose `Cyclone` -> choose `Check This Cyclone Spec`
+- Wait till Cyclone finishes verification.
+- Select `Show Trace File` or `Show Trace File (Graphic)` if you have installed `graphviz` and make sure you tick `Generate Graphic Trace` in Cyclone settings, otherwise it generates text-based trace.
+- The text or image based trace will be displayed in the panel.
 ---
 
 ## License
