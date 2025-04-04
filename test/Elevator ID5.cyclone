@@ -478,10 +478,25 @@ graph Elevator{
     edge { L14 -> DoorOpen }
 
  goal{
-        assert ( initial(f)==4
-            && initial(l5_u) && initial(l2_d) && initial(DIR)==#UP);
+        assert ( initial(f)==4 && !initial(c0) && !initial(c1) 
+        && !initial(c2) && !initial(c3) && !initial(c4) 
+        && !initial(c4) && !initial(c5) && !initial(c6)
+        && !initial(c7) && !initial(c8) && !initial(c9)
+        && !initial(c10) && !initial(c11) && !initial(c12)
+        && !initial(c13) && !initial(c14) 
+        && !initial(l0_u) && !initial(l1_u)  && !initial(l2_u) 
+        && !initial(l3_u) && !initial(l4_u) && initial(l5_u)
+        && !initial(l6_u) && !initial(l7_u) && !initial(l8_u)
+        && !initial(l9_u) && !initial(l10_u) && !initial(l11_u)
+        && !initial(l12_u) && !initial(l13_u)
+        && !initial(l1_d) && initial(l2_d) && !initial(l3_d)
+        && !initial(l4_d) && !initial(l5_d) && !initial(l6_d)
+        && !initial(l7_d) && !initial(l8_d) && !initial(l9_d)
+        && !initial(l10_d) && !initial(l11_d) && !initial(l12_d)
+        && !initial(l13_d) && !initial(l14_d)
+        && initial(DIR)==#UP );
 
-    check for 15 condition (L0) reach (L5,L4)
+    check for 12
 
    }
 
