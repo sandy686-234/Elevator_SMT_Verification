@@ -871,7 +871,7 @@ goal {
     assert ( 
             !initial(c0) && !initial(c1) 
             && !initial(c2) && !initial(c3) && !initial(c4) 
-            && initial(c5) && !initial(c6)
+            && !initial(c5) && !initial(c6)
             && !initial(c7) && !initial(c8) && !initial(c9)
             )
         &&
@@ -901,7 +901,7 @@ goal {
         ) &&
         (initial(f)==15 && initial(DIR) == #UP);
 
-        check for 50
+        check for 80
     }
 
     /*
