@@ -807,35 +807,35 @@ graph Elevator{
 
     edge { SetMotionDown -> MoveDown }
     edge { MoveDown -> MoveDown }
-    edge { MoveDown -> L28 where f == 28 && (l28_d && DIR == #DOWN) || c28; }
-    edge { MoveDown -> L27 where f == 27 && (l27_d && DIR == #DOWN) || c27; }
-    edge { MoveDown -> L26 where f == 26 && (l26_d && DIR == #DOWN) || c26; }
-    edge { MoveDown -> L25 where f == 25 && (l25_d && DIR == #DOWN) || c25; }
-    edge { MoveDown -> L24 where f == 24 && (l24_d && DIR == #DOWN) || c24; }
-    edge { MoveDown -> L23 where f == 23 && (l23_d && DIR == #DOWN) || c23; }
-    edge { MoveDown -> L22 where f == 22 && (l22_d && DIR == #DOWN) || c22; }
-    edge { MoveDown -> L21 where f == 21 && (l21_d && DIR == #DOWN) || c21; }
-    edge { MoveDown -> L20 where f == 20 && (l20_d && DIR == #DOWN) || c20; }
-    edge { MoveDown -> L19 where f == 19 && (l19_d && DIR == #DOWN) || c19; }
-    edge { MoveDown -> L18 where f == 18 && (l18_d && DIR == #DOWN) || c18; }
-    edge { MoveDown -> L17 where f == 17 && (l17_d && DIR == #DOWN) || c17; }
-    edge { MoveDown -> L16 where f == 16 && (l16_d && DIR == #DOWN) || c16; }
-    edge { MoveDown -> L15 where f == 15 && (l15_d && DIR == #DOWN) || c15; }
-    edge { MoveDown -> L14 where f == 14 && (l14_d && DIR == #DOWN) || c14; }
-    edge { MoveDown -> L13 where f == 13 && (l13_d && DIR == #DOWN) || c13; }
-    edge { MoveDown -> L12 where f == 12 && (l12_d && DIR == #DOWN) || c12; }
-    edge { MoveDown -> L11 where f == 11 && (l11_d && DIR == #DOWN) || c11; }
-    edge { MoveDown -> L10 where f == 10 && (l10_d && DIR == #DOWN) || c10; }
-    edge { MoveDown -> L9 where f == 9 && (l9_d && DIR == #DOWN) || c9; }
-    edge { MoveDown -> L8 where f == 8 && (l8_d && DIR == #DOWN) || c8; }
-    edge { MoveDown -> L7 where f == 7 && (l7_d && DIR == #DOWN) || c7; }
-    edge { MoveDown -> L6 where f == 6 && (l6_d && DIR == #DOWN) || c6; }
-    edge { MoveDown -> L5 where f == 5 && (l5_d && DIR == #DOWN) || c5; }
-    edge { MoveDown -> L4 where f == 4 && (l4_d && DIR == #DOWN) || c4; }
-    edge { MoveDown -> L3 where f == 3 && (l3_d && DIR == #DOWN) || c3; }
-    edge { MoveDown -> L2 where f == 2 && (l2_d && DIR == #DOWN) || c2; }
-    edge { MoveDown -> L1 where f == 1 && (l1_d && DIR == #DOWN) || c1; }
-    edge { MoveDown -> L0 where f == 0 && (l0_u && DIR == #DOWN ||  c0 ); }
+    edge { MoveDown -> L28 where f == 28 && ((l28_d && DIR == #DOWN) || c28); }
+    edge { MoveDown -> L27 where f == 27 && ((l27_d && DIR == #DOWN) || c27); }
+    edge { MoveDown -> L26 where f == 26 && ((l26_d && DIR == #DOWN) || c26); }
+    edge { MoveDown -> L25 where f == 25 && ((l25_d && DIR == #DOWN) || c25); }
+    edge { MoveDown -> L24 where f == 24 && ((l24_d && DIR == #DOWN) || c24); }
+    edge { MoveDown -> L23 where f == 23 && ((l23_d && DIR == #DOWN) || c23); }
+    edge { MoveDown -> L22 where f == 22 && ((l22_d && DIR == #DOWN) || c22); }
+    edge { MoveDown -> L21 where f == 21 && ((l21_d && DIR == #DOWN) || c21); }
+    edge { MoveDown -> L20 where f == 20 && ((l20_d && DIR == #DOWN) || c20); }
+    edge { MoveDown -> L19 where f == 19 && ((l19_d && DIR == #DOWN) || c19); }
+    edge { MoveDown -> L18 where f == 18 && ((l18_d && DIR == #DOWN) || c18); }
+    edge { MoveDown -> L17 where f == 17 && ((l17_d && DIR == #DOWN) || c17); }
+    edge { MoveDown -> L16 where f == 16 && ((l16_d && DIR == #DOWN) || c16); }
+    edge { MoveDown -> L15 where f == 15 && ((l15_d && DIR == #DOWN) || c15); }
+    edge { MoveDown -> L14 where f == 14 && ((l14_d && DIR == #DOWN) || c14); }
+    edge { MoveDown -> L13 where f == 13 && ((l13_d && DIR == #DOWN) || c13); }
+    edge { MoveDown -> L12 where f == 12 && ((l12_d && DIR == #DOWN) || c12); }
+    edge { MoveDown -> L11 where f == 11 && ((l11_d && DIR == #DOWN) || c11); }
+    edge { MoveDown -> L10 where f == 10 && ((l10_d && DIR == #DOWN) || c10); }
+    edge { MoveDown -> L9 where f == 9 && ((l9_d && DIR == #DOWN) || c9); }
+    edge { MoveDown -> L8 where f == 8 && ((l8_d && DIR == #DOWN) || c8); }
+    edge { MoveDown -> L7 where f == 7 && ((l7_d && DIR == #DOWN) || c7); }
+    edge { MoveDown -> L6 where f == 6 && ((l6_d && DIR == #DOWN) || c6); }
+    edge { MoveDown -> L5 where f == 5 && ((l5_d && DIR == #DOWN) || c5); }
+    edge { MoveDown -> L4 where f == 4 && ((l4_d && DIR == #DOWN) || c4); }
+    edge { MoveDown -> L3 where f == 3 && ((l3_d && DIR == #DOWN) || c3); }
+    edge { MoveDown -> L2 where f == 2 && ((l2_d && DIR == #DOWN) || c2); }
+    edge { MoveDown -> L1 where f == 1 && ((l1_d && DIR == #DOWN) || c1); }
+    edge { MoveDown -> L0 where f == 0 && ((l0_u && DIR == #DOWN) ||  c0 ); }
     edge { L0 -> DoorOpen }
     edge { L1 -> DoorOpen }
     edge { L2 -> DoorOpen }
@@ -868,19 +868,39 @@ graph Elevator{
     edge { L29 -> DoorOpen }
 
 goal {
-    assert (
-        initial(f) == 22 &&
-
-        (
-            initial(c10) || initial(c20) || initial(c25)
+ assert (initial(f) == 22 && 
+            !initial(c0) && !initial(c1) && !initial(c2) && !initial(c3) && !initial(c4) &&
+            !initial(c5) && !initial(c6) && !initial(c7) && !initial(c8) && !initial(c9) &&
+            initial(c10) && !initial(c11) && !initial(c12) && !initial(c13) && !initial(c14) &&
+            !initial(c15) && !initial(c16) && !initial(c17) && !initial(c18) && !initial(c19) &&
+            initial(c20) && !initial(c21) && !initial(c22) && !initial(c23) && !initial(c24) &&
+            initial(c25) && !initial(c26) && !initial(c27) && !initial(c28) && !initial(c29))
+        && (!initial(l0_u) && !initial(l1_u)  && !initial(l2_u) 
+        && !initial(l3_u) && !initial(l4_u)  && !initial(l5_u) 
+        && !initial(l6_u) && !initial(l7_u)  && !initial(l8_u) 
+        && !initial(l9_u) && !initial(l10_u) && !initial(l11_u) 
+        && !initial(l12_u) && !initial(l13_u) && !initial(l14_u)
+        && !initial(l15_u) && !initial(l16_u) && !initial(l17_u)
+        && !initial(l18_u) && !initial(l19_u) && !initial(l20_u) 
+        && !initial(l21_u) && !initial(l22_u) && !initial(l23_u) 
+        && !initial(l24_u) && !initial(l25_u) && !initial(l26_u) 
+        && !initial(l27_u) && !initial(l28_u)
         ) &&
-        (
-            initial(DIR) == #DOWN
-        )
-    );
 
-    check for 30 condition (L22) reach (
-        L10, L20,L25)
+       (!initial(l1_d) && !initial(l2_d) && !initial(l3_d) &&
+            !initial(l4_d) && !initial(l5_d) && !initial(l6_d) &&
+            !initial(l7_d) && !initial(l8_d) && !initial(l8_d) &&
+            !initial(l9_d) && !initial(l10_d) && initial(l11_d) &&
+            !initial(l12_d) && !initial(l13_d) && !initial(l14_d) && 
+            !initial(l15_d) && !initial(l16_d) && !initial(l17_d) &&
+            !initial(l18_d) && !initial(l19_d) && !initial(l20_d) &&
+            !initial(l21_d) && !initial(l22_d) && !initial(l23_d) &&
+            !initial(l24_d) && !initial(l25_d) && !initial(l26_d) && 
+            !initial(l27_d) && !initial(l28_d) && !initial(l29_d)
+        );
+
+       assert (initial(DIR) == #DOWN );
+       check for 46
 }
 
 }
