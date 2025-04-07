@@ -881,9 +881,20 @@ goal {
             initial(c15) && initial(c16) && initial(c17) && initial(c18) && initial(c19) &&
             initial(c20) && initial(c21) && initial(c22) && initial(c23) && initial(c24) &&
             initial(c25) && initial(c26) && initial(c27) && initial(c28) && initial(c29)
-        ) &&
+        ) 
+        &&
 
-        ( initial(l9_u) && initial(l10_u)  && initial(l1_u) 
+        ( 
+            !initial(l0_u) && !initial(l1_u)  && !initial(l2_u) && !initial(l3_u) &&
+            !initial(l4_u) && !initial(l5_u)  && !initial(l6_u) && !initial(l7_u) &&
+            !initial(l8_u) && 
+            !initial(l1_d)  && !initial(l2_d) && !initial(l3_d) &&
+            !initial(l4_d) && !initial(l5_d)  && !initial(l6_d) && !initial(l7_d) &&
+            !initial(l8_d)
+        )
+        
+        &&
+        ( initial(l9_u) && initial(l10_u)  && initial(l11_u) && initial(l12_u)
         && initial(l13_u) && initial(l14_u) && initial(l15_u)
         && initial(l16_u) && initial(l17_u) && initial(l18_u)
         && initial(l19_u) && initial(l20_u) && initial(l21_u) 
@@ -899,9 +910,9 @@ goal {
             initial(l25_d) && initial(l26_d) && initial(l27_d) &&
             initial(l28_d) && initial(l29_d)
         ) &&
-        (initial(f)==15 && initial(DIR) == #UP);
+        (initial(f)==9 && initial(DIR) == #UP);
 
-        check for 80
+        check for 50
     }
 
     /*
