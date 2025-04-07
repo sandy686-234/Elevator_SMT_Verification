@@ -912,7 +912,7 @@ goal {
         ) &&
         (initial(f)==9 && initial(DIR) == #UP);
 
-        check for 50
+        check for 125
     }
 
     /*
