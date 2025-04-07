@@ -1,7 +1,7 @@
 /*
 * Dot trace for Elevator
-* [Time Stamp]:21:18:22, Apr-04-2025
-* [Location]:/Users/huan/Elevator_SMT_Verification/test/trace/Elevator ID6.dot
+* [Time Stamp]:16:02:32, Apr-07-2025
+* [Location]:/Users/haowu/Elevator_SMT_Verification/test/trace/Elevator ID6.dot
 * [States]:24
 * CC DoorClose DoorOpen L0 L1 L10 L11 L12 L13 L14 L2 L3 L4 L5 L6 L7 L8 L9 LC MoveDown MoveUp SetIdle SetMotionDown SetMotionUp 
 * [Trans]:101
@@ -22,7 +22,7 @@ digraph G {
 
 
 
-label="Elevator \n 21:18:22, Apr-04-2025"
+label="Elevator \n 16:02:32, Apr-07-2025"
 labelloc=" b " ;
 labeljust=" c ";
 	n0 [color="black", style="rounded, filled" , fillcolor="pink" , shape="rect", label= < 
@@ -174,7 +174,7 @@ labeljust=" c ";
 		 </table> > ]
 	n3 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[3] @L8</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[3] @MoveDown</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -189,9 +189,9 @@ labeljust=" c ";
 			 <tr><td align="center">c5 : </td><td>false</td></tr> 
 			 <tr><td align="center">c6 : </td><td>false</td></tr> 
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
-			 <tr><td align="center">c8 : </td><td>false</td></tr> 
+			 <tr><td align="center">c8 : </td><td>true</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -223,7 +223,7 @@ labeljust=" c ";
 		 </table> > ]
 	n4 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[4] @DoorOpen</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[4] @L8</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -240,7 +240,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -272,7 +272,7 @@ labeljust=" c ";
 		 </table> > ]
 	n5 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[5] @CC</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[5] @DoorOpen</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -289,7 +289,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -321,7 +321,7 @@ labeljust=" c ";
 		 </table> > ]
 	n6 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[6] @DoorClose</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[6] @CC</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>DOWN</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -338,7 +338,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 

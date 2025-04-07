@@ -1435,7 +1435,7 @@ graph Elevator{
         );
 
         assert (initial(DIR)==#UP && initial(f)==35);
-        check for 10
+        check for 80
     }
 
 }

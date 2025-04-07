@@ -1,7 +1,7 @@
 /*
 * Dot trace for Elevator
-* [Time Stamp]:23:00:42, Apr-04-2025
-* [Location]:/Users/huan/Elevator_SMT_Verification/test/trace/Elevator ID8.dot
+* [Time Stamp]:16:03:25, Apr-07-2025
+* [Location]:/Users/haowu/Elevator_SMT_Verification/test/trace/Elevator ID8.dot
 * [States]:29
 * CC DoorClose DoorOpen L0 L1 L10 L11 L12 L13 L14 L15 L16 L17 L18 L19 L2 L3 L4 L5 L6 L7 L8 L9 LC MoveDown MoveUp SetIdle SetMotionDown SetMotionUp 
 * [Trans]:131
@@ -22,7 +22,7 @@ digraph G {
 
 
 
-label="Elevator \n 23:00:42, Apr-04-2025"
+label="Elevator \n 16:03:25, Apr-07-2025"
 labelloc=" b " ;
 labeljust=" c ";
 	n0 [color="black", style="rounded, filled" , fillcolor="pink" , shape="rect", label= < 
@@ -1307,8 +1307,8 @@ labeljust=" c ";
 		 </table> > ]
 	n20 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[20] @SetIdle</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[20] @SetMotionUp</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
 			 <tr><td align="center">c10 : </td><td>false</td></tr> 
@@ -1371,7 +1371,7 @@ labeljust=" c ";
 		 </table> > ]
 	n21 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[21] @SetMotionUp</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[21] @MoveUp</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -1393,7 +1393,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>5</td></tr> 
+			 <tr><td align="center">f : </td><td>6</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1457,7 +1457,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>6</td></tr> 
+			 <tr><td align="center">f : </td><td>7</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1521,7 +1521,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>7</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1585,7 +1585,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>8</td></tr> 
+			 <tr><td align="center">f : </td><td>9</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1649,7 +1649,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>9</td></tr> 
+			 <tr><td align="center">f : </td><td>10</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1713,7 +1713,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>10</td></tr> 
+			 <tr><td align="center">f : </td><td>11</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1777,7 +1777,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>11</td></tr> 
+			 <tr><td align="center">f : </td><td>12</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1841,7 +1841,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>12</td></tr> 
+			 <tr><td align="center">f : </td><td>13</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1905,7 +1905,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>13</td></tr> 
+			 <tr><td align="center">f : </td><td>14</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -1969,7 +1969,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>14</td></tr> 
+			 <tr><td align="center">f : </td><td>15</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -2033,7 +2033,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>15</td></tr> 
+			 <tr><td align="center">f : </td><td>16</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -2097,7 +2097,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>16</td></tr> 
+			 <tr><td align="center">f : </td><td>17</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -2161,7 +2161,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>17</td></tr> 
+			 <tr><td align="center">f : </td><td>18</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l10_u : </td><td>false</td></tr> 
@@ -2203,7 +2203,7 @@ labeljust=" c ";
 		 </table> > ]
 	n34 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[34] @MoveUp</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[34] @L18</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -2244,7 +2244,7 @@ labeljust=" c ";
 			 <tr><td align="center">l17_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l17_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l18_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l18_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l18_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l19_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
@@ -2267,7 +2267,7 @@ labeljust=" c ";
 		 </table> > ]
 	n35 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[35] @L18</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[35] @DoorOpen</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 

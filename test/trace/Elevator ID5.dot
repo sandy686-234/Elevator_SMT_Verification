@@ -1,7 +1,7 @@
 /*
 * Dot trace for Elevator
-* [Time Stamp]:21:16:39, Apr-04-2025
-* [Location]:/Users/huan/Elevator_SMT_Verification/test/trace/Elevator ID5.dot
+* [Time Stamp]:16:02:15, Apr-07-2025
+* [Location]:/Users/haowu/Elevator_SMT_Verification/test/trace/Elevator ID5.dot
 * [States]:24
 * CC DoorClose DoorOpen L0 L1 L10 L11 L12 L13 L14 L2 L3 L4 L5 L6 L7 L8 L9 LC MoveDown MoveUp SetIdle SetMotionDown SetMotionUp 
 * [Trans]:101
@@ -22,7 +22,7 @@ digraph G {
 
 
 
-label="Elevator \n 21:16:39, Apr-04-2025"
+label="Elevator \n 16:02:15, Apr-07-2025"
 labelloc=" b " ;
 labeljust=" c ";
 	n0 [color="black", style="rounded, filled" , fillcolor="pink" , shape="rect", label= < 

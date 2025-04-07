@@ -1,7 +1,7 @@
 /*
 * Dot trace for Elevator
-* [Time Stamp]:18:49:29, Apr-04-2025
-* [Location]:/Users/huan/Elevator_SMT_Verification/test/trace/Elevator ID4.dot
+* [Time Stamp]:16:01:54, Apr-07-2025
+* [Location]:/Users/haowu/Elevator_SMT_Verification/test/trace/Elevator ID4.dot
 * [States]:19
 * CC DoorClose DoorOpen L0 L1 L2 L3 L4 L5 L6 L7 L8 L9 LC MoveDown MoveUp SetIdle SetMotionDown SetMotionUp 
 * [Trans]:71
@@ -22,7 +22,7 @@ digraph G {
 
 
 
-label="Elevator \n 18:49:29, Apr-04-2025"
+label="Elevator \n 16:01:54, Apr-07-2025"
 labelloc=" b " ;
 labeljust=" c ";
 	n0 [color="black", style="rounded, filled" , fillcolor="pink" , shape="rect", label= < 
@@ -265,8 +265,8 @@ labeljust=" c ";
 		 </table> > ]
 	n7 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[7] @SetIdle</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[7] @SetMotionUp</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
 			 <tr><td align="center">c2 : </td><td>false</td></tr> 
@@ -299,7 +299,7 @@ labeljust=" c ";
 		 </table> > ]
 	n8 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[8] @SetMotionUp</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[8] @MoveUp</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -311,7 +311,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>5</td></tr> 
+			 <tr><td align="center">f : </td><td>6</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
@@ -345,7 +345,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>6</td></tr> 
+			 <tr><td align="center">f : </td><td>7</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
@@ -379,7 +379,7 @@ labeljust=" c ";
 			 <tr><td align="center">c7 : </td><td>false</td></tr> 
 			 <tr><td align="center">c8 : </td><td>false</td></tr> 
 			 <tr><td align="center">c9 : </td><td>false</td></tr> 
-			 <tr><td align="center">f : </td><td>7</td></tr> 
+			 <tr><td align="center">f : </td><td>8</td></tr> 
 			 <tr><td align="center">l0_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l1_u : </td><td>false</td></tr> 
@@ -401,7 +401,7 @@ labeljust=" c ";
 		 </table> > ]
 	n11 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[11] @MoveUp</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[11] @L8</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -430,12 +430,12 @@ labeljust=" c ";
 			 <tr><td align="center">l7_d : </td><td>false</td></tr> 
 			 <tr><td align="center">l7_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l8_d : </td><td>false</td></tr> 
-			 <tr><td align="center">l8_u : </td><td>true</td></tr> 
+			 <tr><td align="center">l8_u : </td><td>false</td></tr> 
 			 <tr><td align="center">l9_d : </td><td>false</td></tr> 
 		 </table> > ]
 	n12 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[12] @L8</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[12] @DoorOpen</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -469,7 +469,7 @@ labeljust=" c ";
 		 </table> > ]
 	n13 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[13] @DoorOpen</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[13] @CC</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -503,7 +503,7 @@ labeljust=" c ";
 		 </table> > ]
 	n14 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[14] @CC</b></td></tr>
+			 <tr><td align="center" colspan="2" > <b>[14] @DoorClose</b></td></tr>
 			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
@@ -537,8 +537,8 @@ labeljust=" c ";
 		 </table> > ]
 	n15 [color="black", style="rounded, filled" , fillcolor="orange" , shape="rect", label= < 
  		 <table border='0' cellborder='0' style='rounded'> 
-			 <tr><td align="center" colspan="2" > <b>[15] @DoorClose</b></td></tr>
-			 <tr><td align="center">DIR : </td><td>UP</td></tr> 
+			 <tr><td align="center" colspan="2" > <b>[15] @SetIdle</b></td></tr>
+			 <tr><td align="center">DIR : </td><td>NA</td></tr> 
 			 <tr><td align="center">c0 : </td><td>false</td></tr> 
 			 <tr><td align="center">c1 : </td><td>false</td></tr> 
 			 <tr><td align="center">c2 : </td><td>false</td></tr> 
