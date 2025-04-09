@@ -373,8 +373,8 @@ graph Elevator{{
     edge { MoveDown -> MoveDown }
 """
     for i in range( n - 2, 0, -1 ):
-        code += f"    edge {{ MoveDown -> L{i} where f == {i} && (l{i}_d && DIR == #DOWN) || c{i}; }}\n"
-    code += f"    edge {{ MoveDown -> L{0} where f == {0} && (l{0}_u && DIR == #DOWN ||  c{0} ); }}\n"
+        code += f"    edge {{ MoveDown -> L{i} where f == {i} && ((l{i}_d && DIR == #DOWN) || c{i}); }}\n"
+    code += f"    edge {{ MoveDown -> L{0} where f == {0} && ((l{0}_u && DIR == #DOWN) ||  c{0} ); }}\n"
 
     for i in range( n ):
         code += f"    edge {{ L{i} -> DoorOpen }}\n"
